@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "clarinet",
+            "request": "launch",
+            "name": "Call mintpass-enabled",
+            "manifest": "/home/bogachev/find_to_earn/Clarinet.toml",
+            "expression": "(contract-call? .base mintpass-enabled)"
+        }
+    ]
+}

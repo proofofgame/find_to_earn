@@ -1,0 +1,45 @@
+[project]
+name = 'find_to_earn'
+description = ''
+authors = []
+telemetry = true
+cache_dir = '.\.cache'
+
+[[project.requirements]]
+contract_id = 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait'
+
+[[project.requirements]]
+contract_id = 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait'
+
+[contracts.base-t0]
+path = 'contracts/base-t0.clar'
+clarity_version = 2
+epoch = 2.1
+
+[contracts.phase1-t0]
+path = 'contracts/phase1-t0.clar'
+clarity_version = 2
+epoch = 2.1
+
+[contracts.phase2-t0]
+path = 'contracts/phase2-t0.clar'
+clarity_version = 2
+epoch = 2.1
+
+[contracts.phase3-t0]
+path = 'contracts/phase3-t0.clar'
+clarity_version = 2
+epoch = 2.1
+
+[contracts.phase4-t0]
+path = 'contracts/phase4-t0.clar'
+clarity_version = 2
+epoch = 2.1
+[repl.analysis]
+passes = []
+
+[repl.analysis.check_checker]
+strict = false
+trusted_sender = false
+trusted_caller = false
+callee_filter = false

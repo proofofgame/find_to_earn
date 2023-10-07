@@ -1,0 +1,10 @@
+
+**/settings/Mainnet.toml
+**/settings/Testnet.toml
+**/temp
+**/tests
+**/sip009-nft
+**/coverage
+**/commission-trait
+.cache/**
+history.txt
