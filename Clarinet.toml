@@ -14,27 +14,28 @@ contract_id = 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait'
 [contracts.base-t0]
 path = 'contracts/base-t0.clar'
 clarity_version = 2
-epoch = 2.1
+epoch = 2.4
 
 [contracts.phase1-t0]
 path = 'contracts/phase1-t0.clar'
 clarity_version = 2
-epoch = 2.1
+epoch = 2.4
 
 [contracts.phase2-t0]
 path = 'contracts/phase2-t0.clar'
 clarity_version = 2
-epoch = 2.1
+epoch = 2.4
 
 [contracts.phase3-t0]
 path = 'contracts/phase3-t0.clar'
 clarity_version = 2
-epoch = 2.1
+epoch = 2.4
 
 [contracts.phase4-t0]
 path = 'contracts/phase4-t0.clar'
 clarity_version = 2
-epoch = 2.1
+epoch = 2.4
+
 [repl.analysis]
 passes = []
 
