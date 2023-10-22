@@ -151,6 +151,7 @@
   (begin
       (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase4-t0 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
       (try! (contract-call? .phase4-t0 transfer id tx-sender BURN-WALLET))
+      (try! (contract-call? .token mint u100000000 tx-sender))
       (ok true)))
 
 ;; Internal - Mint NFT using Mintpass
@@ -175,6 +176,7 @@
 (as-contract (contract-call? .phase2-t0 set-mint-address))
 (as-contract (contract-call? .phase3-t0 set-mint-address))
 (as-contract (contract-call? .phase4-t0 set-mint-address))
+(as-contract (contract-call? .token set-mint-address))
 
 ;; Mintpasses
 (map-set presale-count 'STVB6RR16PBSE76N2PN7SRGDRYV7R10DTX7YH0E4 u50)

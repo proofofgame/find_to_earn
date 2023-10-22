@@ -11,6 +11,9 @@ contract_id = 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait'
 [[project.requirements]]
 contract_id = 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait'
 
+[[project.requirements]]
+contract_id = 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard'
+
 [contracts.base-t0]
 path = 'contracts/base-t0.clar'
 clarity_version = 2
@@ -33,6 +36,11 @@ epoch = 2.4
 
 [contracts.phase4-t0]
 path = 'contracts/phase4-t0.clar'
+clarity_version = 2
+epoch = 2.4
+
+[contracts.token]
+path = 'contracts/token.clar'
 clarity_version = 2
 epoch = 2.4
 
