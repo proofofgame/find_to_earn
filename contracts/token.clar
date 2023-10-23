@@ -16,7 +16,7 @@
 (define-map mint-address bool principal)
 
 (define-public (mint (amount uint) (recipient principal))
-(begin
+    (begin
         (asserts! (called-from-mint) ERR-NOT-AUTHORIZED)
         (ft-mint? SKUL amount recipient)
     )
@@ -40,10 +40,10 @@
     )
 )
 
-(define-public (burn (burn-amount uint))
+(define-public (burn (burn-amount uint) (sender principal))
     (begin
-        (try! (ft-burn? SKUL burn-amount tx-sender))
-        (ok true)
+        (asserts! (called-from-mint) ERR-NOT-AUTHORIZED)
+        (ft-burn? SKUL burn-amount sender)
     )
 )
 

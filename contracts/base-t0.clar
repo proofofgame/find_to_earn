@@ -50,6 +50,13 @@
     (var-set factor value)
     (ok true)))
 
+(define-public (burn-token-supply (some-value uint))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (try! (contract-call? .token mint some-value tx-sender))
+    (try! (contract-call? .token burn some-value tx-sender))
+    (ok true)))
+
 ;; Claim NFT
 (define-public (claim)
   (if (var-get mintpass-sale-active)
