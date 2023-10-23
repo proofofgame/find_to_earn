@@ -12,6 +12,7 @@
 ;; Variables
 (define-data-var mintpass-sale-active bool false)
 (define-data-var sale-active bool false)
+(define-data-var factor uint u0)
 
 ;; Get presale balance
 (define-read-only (get-presale-balance (account principal))
@@ -41,6 +42,13 @@
     (var-set mintpass-sale-active false)
     (var-set sale-active (not (var-get sale-active)))
     (ok (var-get sale-active))))
+
+;; Set factor (only contract owner)
+(define-public (set-factor (value uint))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (var-set factor value)
+    (ok true)))
 
 ;; Claim NFT
 (define-public (claim)
@@ -98,6 +106,38 @@
     (try! (claim))
     (ok true)))
 
+;; Burn 1 NFT / Phase 1
+(define-public (burn-nft-phase-1 (id uint))
+  (begin
+      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase1-t0 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+      (try! (contract-call? .phase1-t0 transfer id tx-sender BURN-WALLET))
+      (try! (contract-call? .token mint (* (var-get factor) u1000000) tx-sender))
+      (ok true)))
+
+;; Burn 1 NFT / Phase 2
+(define-public (burn-nft-phase-2 (id uint))
+  (begin
+      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase2-t0 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+      (try! (contract-call? .phase2-t0 transfer id tx-sender BURN-WALLET))
+      (try! (contract-call? .token mint (* (var-get factor) u5000000) tx-sender))
+      (ok true)))
+
+;; Burn 1 NFT / Phase 3
+(define-public (burn-nft-phase-3 (id uint))
+  (begin
+      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase3-t0 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+      (try! (contract-call? .phase3-t0 transfer id tx-sender BURN-WALLET))
+      (try! (contract-call? .token mint (* (var-get factor) u20000000) tx-sender))
+      (ok true)))
+
+;; Burn 1 NFT / Phase 4
+(define-public (burn-phase-4 (id uint))
+  (begin
+      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase4-t0 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+      (try! (contract-call? .phase4-t0 transfer id tx-sender BURN-WALLET))
+      (try! (contract-call? .token mint (* (var-get factor) u100000000) tx-sender))
+      (ok true)))
+
 ;; Burn 5 NFTs / Phase 1
 (define-public (burn-phase-1 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
   (begin
@@ -144,14 +184,6 @@
       (try! (contract-call? .phase3-t0 transfer id4 tx-sender BURN-WALLET))
       (try! (contract-call? .phase3-t0 transfer id5 tx-sender BURN-WALLET))
       (try! (contract-call? .phase4-t0 mint tx-sender))
-      (ok true)))
-
-;; Burn 5 NFTs / Phase 
-(define-public (burn-phase-4 (id uint))
-  (begin
-      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase4-t0 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-      (try! (contract-call? .phase4-t0 transfer id tx-sender BURN-WALLET))
-      (try! (contract-call? .token mint u100000000 tx-sender))
       (ok true)))
 
 ;; Internal - Mint NFT using Mintpass
