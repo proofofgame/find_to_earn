@@ -10,7 +10,7 @@
 (define-map market uint {price: uint, commission: principal})
 (define-map mint-address bool principal)
 
-;; Constats and Errors
+;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
 (define-constant ERR-SOLD-OUT (err u200))
 (define-constant ERR-WRONG-COMMISSION (err u201))

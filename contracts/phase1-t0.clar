@@ -10,7 +10,7 @@
 (define-map market uint {price: uint, commission: principal})
 (define-map mint-address bool principal)
 
-;; Constats and Errors
+;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
 (define-constant WALLET 'ST1S0VFFP6XS4DJTZQ7MW1EE4A55XW880T6Q22PHN)
 (define-constant ERR-SOLD-OUT (err u200))

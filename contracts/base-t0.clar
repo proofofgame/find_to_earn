@@ -1,7 +1,7 @@
 ;; Storage
 (define-map presale-count principal uint)
 
-;; Constats and Errors
+;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
 (define-constant BURN-WALLET 'ST5EDWN88FN8Q6A1MQ0N7SKKAG0VZ0ZQ9MXZCEJK)
 (define-constant ERR-NOT-AUTHORIZED (err u100))
@@ -50,6 +50,7 @@
     (var-set factor value)
     (ok true)))
 
+;; Burn some amount of token (only contract owner)
 (define-public (burn-token-supply (some-value uint))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
