@@ -24,7 +24,7 @@
 ;; Variables
 (define-data-var last-id uint u0)
 (define-data-var mint-limit uint u10000)
-(define-data-var mint-price-phase1 uint u5000000)
+(define-data-var mint-price-phase1 uint u10000000)
 (define-data-var metadata-frozen bool false)
 (define-data-var base-uri (string-ascii 80) "ipfs://CID1/")
 

@@ -1,5 +1,5 @@
 [project]
-name = 'find_to_earn'
+name = 'find_to_earn_test'
 description = ''
 authors = []
 telemetry = true
@@ -14,33 +14,23 @@ contract_id = 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait'
 [[project.requirements]]
 contract_id = 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard'
 
-[contracts.base-t0]
-path = 'contracts/base-t0.clar'
+[contracts.base-test-t0]
+path = 'contracts/base-test-t0.clar'
 clarity_version = 2
 epoch = 2.4
 
-[contracts.phase1-t0]
-path = 'contracts/phase1-t0.clar'
+[contracts.phase1-test-t0]
+path = 'contracts/phase1-test-t0.clar'
 clarity_version = 2
 epoch = 2.4
 
-[contracts.phase2-t0]
-path = 'contracts/phase2-t0.clar'
+[contracts.phase2-test-t0]
+path = 'contracts/phase2-test-t0.clar'
 clarity_version = 2
 epoch = 2.4
 
-[contracts.phase3-t0]
-path = 'contracts/phase3-t0.clar'
-clarity_version = 2
-epoch = 2.4
-
-[contracts.phase4-t0]
-path = 'contracts/phase4-t0.clar'
-clarity_version = 2
-epoch = 2.4
-
-[contracts.token]
-path = 'contracts/token.clar'
+[contracts.token-test]
+path = 'contracts/token-test.clar'
 clarity_version = 2
 epoch = 2.4
 
