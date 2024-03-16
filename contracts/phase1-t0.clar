@@ -3,7 +3,7 @@
 (use-trait commission-trait 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait.commission)
 
 ;; Define NFT token
-(define-non-fungible-token skullcoin_find_to_earn_g1_p1 uint)
+(define-non-fungible-token skullcoin_find_to_earn_test_g1_p1 uint)
 
 ;; Storage
 (define-map token-count principal uint)
@@ -23,7 +23,7 @@
 
 ;; Variables
 (define-data-var last-id uint u0)
-(define-data-var mint-limit uint u500)
+(define-data-var mint-limit uint u10000)
 (define-data-var mint-price-phase1 uint u5000000)
 (define-data-var metadata-frozen bool false)
 (define-data-var base-uri (string-ascii 80) "ipfs://CID1/")
@@ -42,7 +42,7 @@
 
 ;; Get the owner of the specified token ID
 (define-read-only (get-owner (id uint))
-  (ok (nft-get-owner? skullcoin_find_to_earn_g1_p1 id)))
+  (ok (nft-get-owner? skullcoin_find_to_earn_test_g1_p1 id)))
 
 ;; Get the last token ID
 (define-read-only (get-last-token-id)
@@ -109,7 +109,7 @@
     (let ((next-id (+ u1 (var-get last-id))))
       (asserts! (called-from-mint) ERR-NOT-AUTHORIZED)
       (asserts! (< (var-get last-id) (var-get mint-limit)) ERR-SOLD-OUT)
-      (match (nft-mint? skullcoin_find_to_earn_g1_p1 next-id new-owner)
+      (match (nft-mint? skullcoin_find_to_earn_test_g1_p1 next-id new-owner)
         success
         (let
         ((current-balance (get-balance new-owner)))
@@ -125,7 +125,7 @@
 
 ;; Non-custodial marketplace
 (define-private (trnsfr (id uint) (sender principal) (recipient principal))
-  (match (nft-transfer? skullcoin_find_to_earn_g1_p1 id sender recipient)
+  (match (nft-transfer? skullcoin_find_to_earn_test_g1_p1 id sender recipient)
         success
           (let
             ((sender-balance (get-balance sender))
@@ -140,7 +140,7 @@
         error (err error)))
 
 (define-private (is-sender-owner (id uint))
-  (let ((owner (unwrap! (nft-get-owner? skullcoin_find_to_earn_g1_p1 id) false)))
+  (let ((owner (unwrap! (nft-get-owner? skullcoin_find_to_earn_test_g1_p1 id) false)))
     (or (is-eq tx-sender owner) (is-eq contract-caller owner))))
 
 (define-read-only (get-listing-in-ustx (id uint))
@@ -161,7 +161,7 @@
     (ok true)))
 	
 (define-public (buy-in-ustx (id uint) (comm <commission-trait>))
-  (let ((owner (unwrap! (nft-get-owner? skullcoin_find_to_earn_g1_p1 id) ERR-NOT-FOUND))
+  (let ((owner (unwrap! (nft-get-owner? skullcoin_find_to_earn_test_g1_p1 id) ERR-NOT-FOUND))
       (listing (unwrap! (map-get? market id) ERR-LISTING))
       (price (get price listing)))
     (asserts! (is-eq (contract-of comm) (get commission listing)) ERR-WRONG-COMMISSION)

@@ -1,6 +1,6 @@
 (impl-trait 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
 
-(define-fungible-token SKUL u2000000000000000)
+(define-fungible-token TEST-SKUL u2000000000000000)
 
 ;; Errors
 (define-constant ERR-NOT-AUTHORIZED (err u301))
@@ -40,7 +40,7 @@
 (define-public (mint (amount uint) (recipient principal))
     (begin
         (asserts! (called-from-mint) ERR-NOT-AUTHORIZED)
-        (try! (ft-mint? SKUL amount recipient))
+        (try! (ft-mint? TEST-SKUL amount recipient))
         (var-set total-minted (+ (var-get total-minted) amount))
         (map-set minters { mint-tx-id: (var-get last-mint-tx-id) } { wallet: tx-sender, amount: amount })
         (print (var-get total-minted))
@@ -52,7 +52,7 @@
 (define-public (burn (burn-amount uint) (sender principal))
     (begin
         (asserts! (called-from-mint) ERR-NOT-AUTHORIZED)
-        (try! (ft-burn? SKUL burn-amount sender))
+        (try! (ft-burn? TEST-SKUL burn-amount sender))
         (var-set total-burned (+ (var-get total-burned) burn-amount))
         (map-set burners { burn-tx-id: (var-get last-burn-tx-id) } { wallet: tx-sender, amount: burn-amount })
         (print (var-get total-burned))
@@ -64,7 +64,7 @@
 (define-public (transfer (amount uint) (sender principal) (recipient principal) (memo (optional (buff 34))))
     (if (is-eq tx-sender sender)
         (begin
-            (try! (ft-transfer? SKUL amount sender recipient))
+            (try! (ft-transfer? TEST-SKUL amount sender recipient))
             (print memo)
             (ok true)
         )
@@ -108,12 +108,12 @@
 
 ;; Get token name
 (define-read-only (get-name)
-    (ok "SKULLCOIN")
+    (ok "TETS-SKULLCOIN")
 )
 
 ;; Get token symbol
 (define-read-only (get-symbol)
-    (ok "SKUL")
+    (ok "TEST-SKUL")
 )
 
 ;; Get decimals
@@ -123,12 +123,12 @@
 
 ;; Get user (principal) balance
 (define-read-only (get-balance (who principal))
-    (ok (ft-get-balance SKUL who))
+    (ok (ft-get-balance TEST-SKUL who))
 )
 
 ;; Get total supply
 (define-read-only (get-total-supply)
-    (ok (ft-get-supply SKUL))
+    (ok (ft-get-supply TEST-SKUL))
 )
 
 ;; Get token URI
