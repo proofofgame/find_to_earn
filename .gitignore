@@ -6,5 +6,6 @@
 **/sip009-nft
 **/coverage
 **/commission-trait
+**/node_modules
 .cache/**
 history.txt
