@@ -1,6 +1,6 @@
 ;; Traits
-(impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
-(use-trait commission-trait 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait.commission)
+(impl-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.nft-trait.nft-trait)
+(use-trait commission-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.commission-trait.commission)
 
 ;; Define NFT token
 (define-non-fungible-token skullcoin_find_to_earn_test_g1_p2 uint)
