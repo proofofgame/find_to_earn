@@ -160,6 +160,7 @@
       (try! (contract-call? .phase1-t0 transfer id4 tx-sender BURN-WALLET))
       (try! (contract-call? .phase1-t0 transfer id5 tx-sender BURN-WALLET))
       (try! (contract-call? .phase2-t0 mint tx-sender))
+      (try! (contract-call? .phase2-t0 mint tx-sender))
       (ok true)))
 
 ;; Burn 5 NFTs / Phase 2
@@ -176,6 +177,7 @@
       (try! (contract-call? .phase2-t0 transfer id4 tx-sender BURN-WALLET))
       (try! (contract-call? .phase2-t0 transfer id5 tx-sender BURN-WALLET))
       (try! (contract-call? .phase3-t0 mint tx-sender))
+      (try! (contract-call? .phase3-t0 mint tx-sender))
       (ok true)))
 
 ;; Burn 5 NFTs / Phase 3
@@ -191,6 +193,7 @@
       (try! (contract-call? .phase3-t0 transfer id3 tx-sender BURN-WALLET))
       (try! (contract-call? .phase3-t0 transfer id4 tx-sender BURN-WALLET))
       (try! (contract-call? .phase3-t0 transfer id5 tx-sender BURN-WALLET))
+      (try! (contract-call? .phase4-t0 mint tx-sender))
       (try! (contract-call? .phase4-t0 mint tx-sender))
       (ok true)))
 
