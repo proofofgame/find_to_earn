@@ -82,6 +82,14 @@
       (try! (contract-call? .token-test-t1 mint (* (var-get factor) u5000000) tx-sender))
       (ok true)))
 
+;; Claim treasure / Phase 6
+(define-public (claim-treasure-phase-6 (id uint))
+  (begin
+      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase6-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+      (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
+      (try! (contract-call? .token-test-t1 mint (* (var-get factor) u10000000) tx-sender))
+      (ok true)))
+
 ;; Burn 5 NFTs / Phase 1
 (define-public (burn-phase-1 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
   (begin
@@ -175,6 +183,26 @@
       (try! (contract-call? .phase5-test-t1 transfer id3 tx-sender BURN-WALLET))
       (try! (contract-call? .phase5-test-t1 transfer id4 tx-sender BURN-WALLET))
       (try! (contract-call? .phase5-test-t1 transfer id5 tx-sender BURN-WALLET))
+      (try! (contract-call? .phase6-test-t1 mint tx-sender))
+      (try! (contract-call? .phase6-test-t1 mint tx-sender))
+      (try! (contract-call? .phase6-test-t1 mint tx-sender))
+      (try! (contract-call? .phase6-test-t1 mint tx-sender))
+      (try! (contract-call? .phase6-test-t1 mint tx-sender))
+      (ok true)))
+
+;; Burn 5 NFTs / Phase 6
+(define-public (burn-phase-6 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
+  (begin
+      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase6-test-t1 get-owner id1) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase6-test-t1 get-owner id2) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase6-test-t1 get-owner id3) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase6-test-t1 get-owner id4) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase6-test-t1 get-owner id5) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+      (try! (contract-call? .phase6-test-t1 transfer id1 tx-sender BURN-WALLET))
+      (try! (contract-call? .phase6-test-t1 transfer id2 tx-sender BURN-WALLET))
+      (try! (contract-call? .phase6-test-t1 transfer id3 tx-sender BURN-WALLET))
+      (try! (contract-call? .phase6-test-t1 transfer id4 tx-sender BURN-WALLET))
+      (try! (contract-call? .phase6-test-t1 transfer id5 tx-sender BURN-WALLET))
       (ok true)))
 
 ;; Claim NFT
@@ -195,4 +223,5 @@
 (as-contract (contract-call? .phase3-test-t1 set-mint-address))
 (as-contract (contract-call? .phase4-test-t1 set-mint-address))
 (as-contract (contract-call? .phase5-test-t1 set-mint-address))
+(as-contract (contract-call? .phase6-test-t1 set-mint-address))
 (as-contract (contract-call? .token-test-t1 set-mint-address))
