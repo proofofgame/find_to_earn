@@ -1,6 +1,6 @@
 (impl-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait-ft-standard.sip-010-trait)
 
-(define-fungible-token TEST-SKUL u2000000000000000)
+(define-fungible-token TEST-SKUL-G2 u2000000000000000)
 
 ;; Errors
 (define-constant ERR-NOT-AUTHORIZED (err u301))
@@ -40,7 +40,7 @@
 (define-public (mint (amount uint) (recipient principal))
     (begin
         (asserts! (called-from-mint) ERR-NOT-AUTHORIZED)
-        (try! (ft-mint? TEST-SKUL amount recipient))
+        (try! (ft-mint? TEST-SKUL-G2 amount recipient))
         (var-set total-minted (+ (var-get total-minted) amount))
         (map-set minters { mint-tx-id: (var-get last-mint-tx-id) } { wallet: tx-sender, amount: amount })
         (print (var-get total-minted))
@@ -52,7 +52,7 @@
 (define-public (burn (burn-amount uint) (sender principal))
     (begin
         (asserts! (called-from-mint) ERR-NOT-AUTHORIZED)
-        (try! (ft-burn? TEST-SKUL burn-amount sender))
+        (try! (ft-burn? TEST-SKUL-G2 burn-amount sender))
         (var-set total-burned (+ (var-get total-burned) burn-amount))
         (map-set burners { burn-tx-id: (var-get last-burn-tx-id) } { wallet: tx-sender, amount: burn-amount })
         (print (var-get total-burned))
@@ -64,7 +64,7 @@
 (define-public (transfer (amount uint) (sender principal) (recipient principal) (memo (optional (buff 34))))
     (if (is-eq tx-sender sender)
         (begin
-            (try! (ft-transfer? TEST-SKUL amount sender recipient))
+            (try! (ft-transfer? TEST-SKUL-G2 amount sender recipient))
             (print memo)
             (ok true)
         )
@@ -108,12 +108,12 @@
 
 ;; Get token name
 (define-read-only (get-name)
-    (ok "TETS-SKULLCOIN")
+    (ok "TEST-SKULLCOIN-G2")
 )
 
 ;; Get token symbol
 (define-read-only (get-symbol)
-    (ok "TEST-SKUL")
+    (ok "TEST-SKUL-G2")
 )
 
 ;; Get decimals
@@ -123,12 +123,12 @@
 
 ;; Get user (principal) balance
 (define-read-only (get-balance (who principal))
-    (ok (ft-get-balance TEST-SKUL who))
+    (ok (ft-get-balance TEST-SKUL-G2 who))
 )
 
 ;; Get total supply
 (define-read-only (get-total-supply)
-    (ok (ft-get-supply TEST-SKUL))
+    (ok (ft-get-supply TEST-SKUL-G2))
 )
 
 ;; Get token URI
