@@ -5,10 +5,15 @@
 (define-constant ERR-SALE-NOT-ACTIVE (err u101))
 (define-constant ERR-NOT-OWNER (err u102))
 (define-constant ERR-NOT-TREASURE (err u103))
+(define-constant REACHED-BLOCK-PICK-LIMIT (err u104))
 
 ;; Variables
 (define-data-var sale-active bool false)
 (define-data-var factor uint u1)
+(define-data-var last-block uint u0)
+(define-data-var byte-id uint u0)
+(define-data-var picked-id uint u0)
+(define-data-var last-vrf (buff 64) 0x000102030405)
 
 ;; Set public sale flag (only contract owner)
 (define-public (flip-sale)
@@ -44,51 +49,93 @@
 
 ;; Claim treasure / Phase 1
 (define-public (claim-treasure-phase-1 (id uint))
-  (begin
-      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase1-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-      (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
-      (try! (contract-call? .token-test-t1 mint (* (var-get factor) u1000000) tx-sender))
-      (ok true)))
+  (let ((picked-idx (var-get picked-id)))
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase1-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
+    (try! (pick-id))
+        (if (is-eq (mod picked-idx u2) u0)
+          (begin
+            (try! (contract-call? .token-test-t1 mint (* (var-get factor) u1000000) tx-sender))
+            (print "Congrats")
+            (ok picked-idx))
+          (begin
+            (print "Not this time")
+            (ok picked-idx)))))
 
 ;; Claim treasure / Phase 2
 (define-public (claim-treasure-phase-2 (id uint))
-  (begin
-      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase2-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-      (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
-      (try! (contract-call? .token-test-t1 mint (* (var-get factor) u2000000) tx-sender))
-      (ok true)))
+  (let ((picked-idx (var-get picked-id)))
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase2-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
+    (try! (pick-id))
+        (if (is-eq (mod picked-idx u2) u0)
+          (begin
+            (try! (contract-call? .token-test-t1 mint (* (var-get factor) u2000000) tx-sender))
+            (print "Congrats")
+            (ok picked-idx))
+          (begin
+            (print "Not this time")
+            (ok picked-idx)))))
 
 ;; Claim treasure / Phase 3
 (define-public (claim-treasure-phase-3 (id uint))
-  (begin
-      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase3-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-      (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
-      (try! (contract-call? .token-test-t1 mint (* (var-get factor) u3000000) tx-sender))
-      (ok true)))
+  (let ((picked-idx (var-get picked-id)))
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase3-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
+    (try! (pick-id))
+        (if (is-eq (mod picked-idx u2) u0)
+          (begin
+            (try! (contract-call? .token-test-t1 mint (* (var-get factor) u3000000) tx-sender))
+            (print "Congrats")
+            (ok picked-idx))
+          (begin
+            (print "Not this time")
+            (ok picked-idx)))))
 
 ;; Claim treasure / Phase 4
 (define-public (claim-treasure-phase-4 (id uint))
-  (begin
-      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase4-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-      (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
-      (try! (contract-call? .token-test-t1 mint (* (var-get factor) u4000000) tx-sender))
-      (ok true)))
+  (let ((picked-idx (var-get picked-id)))
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase4-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
+    (try! (pick-id))
+        (if (is-eq (mod picked-idx u2) u0)
+          (begin
+            (try! (contract-call? .token-test-t1 mint (* (var-get factor) u4000000) tx-sender))
+            (print "Congrats")
+            (ok picked-idx))
+          (begin
+            (print "Not this time")
+            (ok picked-idx)))))
 
 ;; Claim treasure / Phase 5
 (define-public (claim-treasure-phase-5 (id uint))
-  (begin
-      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase5-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-      (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
-      (try! (contract-call? .token-test-t1 mint (* (var-get factor) u5000000) tx-sender))
-      (ok true)))
+  (let ((picked-idx (var-get picked-id)))
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase5-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
+    (try! (pick-id))
+        (if (is-eq (mod picked-idx u2) u0)
+          (begin
+            (try! (contract-call? .token-test-t1 mint (* (var-get factor) u5000000) tx-sender))
+            (print "Congrats")
+            (ok picked-idx))
+          (begin
+            (print "Not this time")
+            (ok picked-idx)))))
 
 ;; Claim treasure / Phase 6
 (define-public (claim-treasure-phase-6 (id uint))
-  (begin
-      (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase6-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-      (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
-      (try! (contract-call? .token-test-t1 mint (* (var-get factor) u10000000) tx-sender))
-      (ok true)))
+  (let ((picked-idx (var-get picked-id)))
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase6-test-t1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (mod id u5) u0) ERR-NOT-TREASURE)
+    (try! (pick-id))
+        (if (is-eq (mod picked-idx u2) u0)
+          (begin
+            (try! (contract-call? .token-test-t1 mint (* (var-get factor) u10000000) tx-sender))
+            (print "Congrats")
+            (ok picked-idx))
+          (begin
+            (print "Not this time")
+            (ok picked-idx)))))
 
 ;; Burn 5 NFTs / Phase 1
 (define-public (burn-phase-1 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
@@ -208,14 +255,35 @@
 ;; Claim NFT
 (define-private (claim)
   (begin
-    (public-mint tx-sender)))
+    (mint tx-sender)))
 
-;; Internal - Mint NFT via public sale
-(define-private (public-mint (new-owner principal))
+;; Internal - Mint NFT
+(define-private (mint (new-owner principal))
   (begin
     (asserts! (var-get sale-active) ERR-SALE-NOT-ACTIVE)
     (try! (contract-call? .phase1-test-t1 mint new-owner))
     (ok true)))
+
+;; Pick id with RNG based on VRF
+(define-private (pick-id)
+  (let ((vrf (var-get last-vrf))
+        (b-idx (var-get byte-id)))
+    (if (is-eq (var-get last-block) block-height)
+      (begin
+        (asserts! (< b-idx u63) REACHED-BLOCK-PICK-LIMIT)
+        (var-set picked-id (buff-to-uint-be (unwrap-panic (element-at vrf b-idx))))
+        (var-set byte-id (+ b-idx u1))
+        (ok (var-get picked-id)))
+      (begin
+        (set-vrf)
+        (var-set last-block block-height)
+        (var-set picked-id (buff-to-uint-be (unwrap-panic (element-at vrf b-idx))))
+        (var-set byte-id u1)
+        (ok (var-get picked-id))))))
+
+;; Set VRF from previous block
+(define-private (set-vrf)    
+    (var-set last-vrf (sha512 (unwrap-panic (get-block-info? vrf-seed (- block-height u1))))))
 
 ;; Register this contract as allowed to mint
 (as-contract (contract-call? .phase1-test-t1 set-mint-address))
