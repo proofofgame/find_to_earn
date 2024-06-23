@@ -1,3 +1,6 @@
+;; Skullcoin | Find to Earn | Beta Test #1 | v.0.2.0
+;; skullco.in
+
 ;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
 (define-constant BURN-WALLET 'ST5EDWN88FN8Q6A1MQ0N7SKKAG0VZ0ZQ9MXZCEJK)
