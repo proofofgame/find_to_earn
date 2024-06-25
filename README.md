@@ -44,8 +44,6 @@ claim-treasure-phase-4: Checks the chest at the fourth rarity level.
 
 claim-treasure-phase-5: Checks the chest at the fifth rarity level.
 
-claim-treasure-phase-6: Checks the chest at the sixth rarity level.
-
 burn-phase-1: Burns 5 NFTs of the first level.
 
 burn-phase-2: Burns 5 NFTs of the second level.
@@ -55,8 +53,6 @@ burn-phase-3: Burns 5 NFTs of the third level.
 burn-phase-4: Burns 5 NFTs of the fourth level.
 
 burn-phase-5: Burns 5 NFTs of the fifth level.
-
-burn-phase-6: Burns 5 NFTs of the sixth level.
 
 **Private**
 
