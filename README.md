@@ -4,25 +4,23 @@
 
 All operations performed by the user in the web interface (on the website) are executed in this contract.
 
-Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.base-test-t1
+Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.base-test-t2
 
 ### Token Contract
 
-Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.token-test-t1
+Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.token-test-t2
 
 ### NFT Contracts
 
-Phase 1 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase1-test-t1
+Phase 1 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase1-test-t2
 
-Phase 2 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase2-test-t1
+Phase 2 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase2-test-t2
 
-Phase 3 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase3-test-t1
+Phase 3 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase3-test-t2
 
-Phase 4 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase4-test-t1
+Phase 4 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase4-test-t2
 
-Phase 5 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase5-test-t1
-
-Phase 6 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase6-test-t1
+Phase 5 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase5-test-t2
 
 ### Functions
 
