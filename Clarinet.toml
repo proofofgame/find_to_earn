@@ -14,28 +14,28 @@ contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.commission-trait'
 [[project.requirements]]
 contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait-ft-standard'
 
-[contracts.base-test-t2]
-path = 'contracts/base-test-t2.clar'
+[contracts.base-test-t3]
+path = 'contracts/base-test-t3.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.phase1-test-t2]
-path = 'contracts/phase1-test-t2.clar'
+[contracts.phase1-test-t3]
+path = 'contracts/phase1-test-t3.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.phase2-test-t2]
-path = 'contracts/phase2-test-t2.clar'
+[contracts.phase2-test-t3]
+path = 'contracts/phase2-test-t3.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.phase3-test-t2]
-path = 'contracts/phase3-test-t2.clar'
+[contracts.phase3-test-t3]
+path = 'contracts/phase3-test-t3.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.phase4-test-t2]
-path = 'contracts/phase4-test-t2.clar'
+[contracts.phase4-test-t3]
+path = 'contracts/phase4-test-t3.clar'
 clarity_version = 2
 epoch = 2.5
 
