@@ -39,16 +39,6 @@ path = 'contracts/phase4-test-t2.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.phase5-test-t2]
-path = 'contracts/phase5-test-t2.clar'
-clarity_version = 2
-epoch = 2.5
-
-[contracts.token-test-t2]
-path = 'contracts/token-test-t2.clar'
-clarity_version = 2
-epoch = 2.5
-
 [repl.analysis]
 passes = []
 
