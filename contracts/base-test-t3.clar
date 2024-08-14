@@ -1,6 +1,9 @@
 ;; Skullcoin | Find to Earn | Beta Test #3 | v.0.3.0
 ;; skullco.in
 
+;; Traits
+(use-trait ft-trait .ft-trait.ft-trait)
+
 ;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
 (define-constant BURN-WALLET 'ST5EDWN88FN8Q6A1MQ0N7SKKAG0VZ0ZQ9MXZCEJK)
@@ -31,6 +34,48 @@
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (var-set factor value)
     (ok true)))
+
+;; Deposit SIP-010 tokens in contract
+(define-public (deposit (asset <ft-trait>) (amount uint))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (try! (contract-call? asset transfer amount tx-sender (as-contract tx-sender) none))
+  (ok true)))
+
+;; Withdrawal SIP-010 tokens from contract
+(define-public (withdraw (asset <ft-trait>) (amount uint))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (try! (as-contract (contract-call? asset transfer amount tx-sender CONTRACT-OWNER none)))
+  (ok true)))
+
+;; Send SIP-010 tokens to players
+(define-public (send (asset <ft-trait>) (amount uint) (player principal))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (try! (as-contract (contract-call? asset transfer amount tx-sender player none)))
+  (ok true)))
+
+;; Deposit STX in contract
+(define-public (deposit-stx (amount uint))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (try! (stx-transfer? amount tx-sender (as-contract tx-sender)))
+  (ok true)))
+
+;; Withdrawal STX from contract
+(define-public (withdraw-stx (amount uint))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (try! (as-contract (stx-transfer? amount tx-sender CONTRACT-OWNER)))
+  (ok true)))
+
+;; Send STX to players
+(define-public (send-stx (amount uint) (player principal))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (try! (as-contract (stx-transfer? amount tx-sender player)))
+  (ok true)))
 
 ;; Claim 5 NFT
 (define-public (claim-five)
@@ -130,7 +175,7 @@
       (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase3-test-t3 get-owner id3) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
       (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase3-test-t3 get-owner id4) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
       (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase3-test-t3 get-owner id5) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-      (try! (contract-call? .phase3-test-t2 transfer id1 tx-sender BURN-WALLET))
+      (try! (contract-call? .phase3-test-t3 transfer id1 tx-sender BURN-WALLET))
       (try! (contract-call? .phase3-test-t3 transfer id2 tx-sender BURN-WALLET))
       (try! (contract-call? .phase3-test-t3 transfer id3 tx-sender BURN-WALLET))
       (try! (contract-call? .phase3-test-t3 transfer id4 tx-sender BURN-WALLET))
