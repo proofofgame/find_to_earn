@@ -35,42 +35,42 @@
     (var-set factor value)
     (ok true)))
 
-;; Deposit SIP-010 tokens in contract
+;; Deposit SIP-010 tokens in contract (only contract owner)
 (define-public (deposit (asset <ft-trait>) (amount uint))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (try! (contract-call? asset transfer amount tx-sender (as-contract tx-sender) none))
   (ok true)))
 
-;; Withdrawal SIP-010 tokens from contract
+;; Withdrawal SIP-010 tokens from contract (only contract owner)
 (define-public (withdraw (asset <ft-trait>) (amount uint))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (try! (as-contract (contract-call? asset transfer amount tx-sender CONTRACT-OWNER none)))
   (ok true)))
 
-;; Send SIP-010 tokens to players
+;; Send SIP-010 tokens to player (only contract owner)
 (define-public (send (asset <ft-trait>) (amount uint) (player principal))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (try! (as-contract (contract-call? asset transfer amount tx-sender player none)))
   (ok true)))
 
-;; Deposit STX in contract
+;; Deposit STX in contract (only contract owner)
 (define-public (deposit-stx (amount uint))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (try! (stx-transfer? amount tx-sender (as-contract tx-sender)))
   (ok true)))
 
-;; Withdrawal STX from contract
+;; Withdrawal STX from contract (only contract owner)
 (define-public (withdraw-stx (amount uint))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (try! (as-contract (stx-transfer? amount tx-sender CONTRACT-OWNER)))
   (ok true)))
 
-;; Send STX to players
+;; Send STX to player (only contract owner)
 (define-public (send-stx (amount uint) (player principal))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)

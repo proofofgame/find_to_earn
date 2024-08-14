@@ -24,6 +24,18 @@ flip-sale: Toggles the sale state. Only callable by the contract owner.
 
 set-factor: Sets the multiplier for the number of tokens received after claiming treasure. Only callable by the contract owner.
 
+deposit: Deposit SIP-010 tokens in contract. Only callable by the contract owner.
+
+withdraw: Withdrawal SIP-010 tokens from contract. Only callable by the contract owner.
+
+send: Send SIP-010 tokens to player. Only callable by the contract owner.
+
+deposit-stx: Deposit STX in contract. Only callable by the contract owner.
+
+withdraw-stx: Withdrawal STX from contract. Only callable by the contract owner.
+
+send-stx: Send STX to player. Only callable by the contract owner.
+
 claim-five: Mints 5 NFTs.
 
 claim-treasure-phase-1: Checks the chest at the first rarity level.
