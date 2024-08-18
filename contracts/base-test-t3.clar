@@ -45,21 +45,21 @@
     (ok true)))
 
 ;; Deposit SIP-010 tokens in contract (only contract owner)
-(define-public (deposit (asset <ft-trait>) (amount uint))
+(define-public (deposit-ft (asset <ft-trait>) (amount uint))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (try! (contract-call? asset transfer amount tx-sender (as-contract tx-sender) none))
   (ok true)))
 
 ;; Withdrawal SIP-010 tokens from contract (only contract owner)
-(define-public (withdraw (asset <ft-trait>) (amount uint))
+(define-public (withdraw-ft (asset <ft-trait>) (amount uint))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (try! (as-contract (contract-call? asset transfer amount tx-sender CONTRACT-OWNER none)))
   (ok true)))
 
 ;; Send SIP-010 tokens to player (only contract owner)
-(define-public (send (asset <ft-trait>) (amount uint) (player principal))
+(define-public (send-ft (asset <ft-trait>) (amount uint) (player principal))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (try! (as-contract (contract-call? asset transfer amount tx-sender player none)))
@@ -151,6 +151,7 @@
             (print "Congrats")
             (ok (var-get picked-id)))
           (begin
+            (map-set treasure-phase-1 { id: id } { claim: false})
             (print "Not this time")
             (ok (var-get picked-id))))))
 
@@ -167,6 +168,7 @@
             (print "Congrats")
             (ok (var-get picked-id)))
           (begin
+            (map-set treasure-phase-2 { id: id } { claim: false})
             (print "Not this time")
             (ok (var-get picked-id))))))
 
@@ -183,6 +185,7 @@
             (print "Congrats")
             (ok (var-get picked-id)))
           (begin
+            (map-set treasure-phase-3 { id: id } { claim: false})
             (print "Not this time")
             (ok (var-get picked-id))))))
 
@@ -199,6 +202,7 @@
             (print "Congrats")
             (ok (var-get picked-id)))
           (begin
+            (map-set coins-phase-1 { id: id } { claim: false})
             (print "Not this time")
             (ok (var-get picked-id))))))
 
@@ -215,6 +219,7 @@
             (print "Congrats")
             (ok (var-get picked-id)))
           (begin
+            (map-set coins-phase-2 { id: id } { claim: false})
             (print "Not this time")
             (ok (var-get picked-id))))))
 
@@ -231,6 +236,7 @@
             (print "Congrats")
             (ok (var-get picked-id)))
           (begin
+            (map-set coins-phase-3 { id: id } { claim: false})
             (print "Not this time")
             (ok (var-get picked-id))))))
 
