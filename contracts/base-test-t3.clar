@@ -21,6 +21,15 @@
 (define-data-var picked-id uint u0)
 (define-data-var last-vrf (buff 64) 0x00)
 
+;; Maps
+;; TODO - Maps for treasure and coins
+(define-map treasure-phase-1 { id: uint} {claim: bool})
+
+(define-public (set-treasure-phase-1 (nft-id uint) (status bool))
+  (begin
+    (map-set treasure-phase-1 { id: nft-id } { claim: status})
+  (ok true)))
+
 ;; Set public sale flag (only contract owner)
 (define-public (flip-sale)
   (begin
