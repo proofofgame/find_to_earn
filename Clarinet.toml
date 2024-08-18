@@ -14,9 +14,6 @@ contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.commission-trait'
 [[project.requirements]]
 contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait-ft-standard'
 
-[[project.requirements]]
-contract_id = 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM.ft-trait'
-
 [contracts.base-test-t3]
 path = 'contracts/base-test-t3.clar'
 clarity_version = 2
