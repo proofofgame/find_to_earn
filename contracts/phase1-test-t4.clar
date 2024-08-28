@@ -3,7 +3,7 @@
 (use-trait commission-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.commission-trait.commission)
 
 ;; Define NFT token
-(define-non-fungible-token skullcoin_find_to_earn_test_bg3_p2 uint)
+(define-non-fungible-token skullcoin_find_to_earn_test_bg4_p1 uint)
 
 ;; Storage
 (define-map token-count principal uint)
@@ -12,6 +12,7 @@
 
 ;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
+(define-constant WALLET 'ST1S0VFFP6XS4DJTZQ7MW1EE4A55XW880T6Q22PHN)
 (define-constant ERR-SOLD-OUT (err u200))
 (define-constant ERR-WRONG-COMMISSION (err u201))
 (define-constant ERR-NOT-AUTHORIZED (err u202))
@@ -19,13 +20,13 @@
 (define-constant ERR-METADATA-FROZEN (err u204))
 (define-constant ERR-MINT-ALREADY-SET (err u205))
 (define-constant ERR-LISTING (err u206))
-(define-constant ERR-MINT-LIMIT (err u207))
 
 ;; Variables
 (define-data-var last-id uint u0)
-(define-data-var mint-limit uint u200)
+(define-data-var mint-limit uint u500)
+(define-data-var mint-price-phase1 uint u1000000)
 (define-data-var metadata-frozen bool false)
-(define-data-var base-uri (string-ascii 80) "ipfs://CID2/")
+(define-data-var base-uri (string-ascii 80) "ipfs://CID1/")
 
 ;; Get balance
 (define-read-only (get-balance (account principal))
@@ -41,7 +42,7 @@
 
 ;; Get the owner of the specified token ID
 (define-read-only (get-owner (id uint))
-  (ok (nft-get-owner? skullcoin_find_to_earn_test_bg3_p2 id)))
+  (ok (nft-get-owner? skullcoin_find_to_earn_test_bg4_p1 id)))
 
 ;; Get the last token ID
 (define-read-only (get-last-token-id)
@@ -54,6 +55,10 @@
 ;; Get the mint limit
 (define-read-only (get-mint-limit)
   (ok (var-get mint-limit)))
+
+;; Get the mint price
+(define-read-only (get-mint-price)
+  (ok (var-get mint-price-phase1)))
 
 ;; Change the base uri (only contract owner)
 (define-public (set-base-uri (new-base-uri (string-ascii 80)))
@@ -69,6 +74,13 @@
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (var-set mint-limit limit)
     (ok true)))
+
+;; Set mint price in uSTX (only contract owner)
+(define-public (set-mint-price-in-ustx (price1 uint))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (var-set mint-price-phase1 price1)
+    (ok (var-get mint-price-phase1))))
 
 ;; Freeze metadata
 (define-public (freeze-metadata)
@@ -97,11 +109,12 @@
     (let ((next-id (+ u1 (var-get last-id))))
       (asserts! (called-from-mint) ERR-NOT-AUTHORIZED)
       (asserts! (< (var-get last-id) (var-get mint-limit)) ERR-SOLD-OUT)
-      (match (nft-mint? skullcoin_find_to_earn_test_bg3_p2 next-id new-owner)
+      (match (nft-mint? skullcoin_find_to_earn_test_bg4_p1 next-id new-owner)
         success
         (let
         ((current-balance (get-balance new-owner)))
           (begin
+            (try! (stx-transfer? (var-get mint-price-phase1) tx-sender WALLET))
             (var-set last-id next-id)
             (map-set token-count
               new-owner
@@ -112,7 +125,7 @@
 
 ;; Non-custodial marketplace
 (define-private (trnsfr (id uint) (sender principal) (recipient principal))
-  (match (nft-transfer? skullcoin_find_to_earn_test_bg3_p2 id sender recipient)
+  (match (nft-transfer? skullcoin_find_to_earn_test_bg4_p1 id sender recipient)
         success
           (let
             ((sender-balance (get-balance sender))
@@ -127,7 +140,7 @@
         error (err error)))
 
 (define-private (is-sender-owner (id uint))
-  (let ((owner (unwrap! (nft-get-owner? skullcoin_find_to_earn_test_bg3_p2 id) false)))
+  (let ((owner (unwrap! (nft-get-owner? skullcoin_find_to_earn_test_bg4_p1 id) false)))
     (or (is-eq tx-sender owner) (is-eq contract-caller owner))))
 
 (define-read-only (get-listing-in-ustx (id uint))
@@ -148,7 +161,7 @@
     (ok true)))
 	
 (define-public (buy-in-ustx (id uint) (comm <commission-trait>))
-  (let ((owner (unwrap! (nft-get-owner? skullcoin_find_to_earn_test_bg3_p2 id) ERR-NOT-FOUND))
+  (let ((owner (unwrap! (nft-get-owner? skullcoin_find_to_earn_test_bg4_p1 id) ERR-NOT-FOUND))
       (listing (unwrap! (map-get? market id) ERR-LISTING))
       (price (get price listing)))
     (asserts! (is-eq (contract-of comm) (get commission listing)) ERR-WRONG-COMMISSION)
