@@ -4,23 +4,19 @@
 
 All operations performed by the user in the web interface (on the website) are executed in this contract.
 
-Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.base-test-t2
-
-### Token Contract
-
-Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.token-test-t2
+Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.base-test-t6
 
 ### NFT Contracts
 
-Phase 1 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase1-test-t2
+Phase 1 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase1-test-t6
 
-Phase 2 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase2-test-t2
+Phase 2 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase2-test-t6
 
-Phase 3 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase3-test-t2
+Phase 3 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase3-test-t6
 
-Phase 4 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase4-test-t2
+Phase 4 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase4-test-t6
 
-Phase 5 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase5-test-t2
+Phase 5 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase5-test-t6
 
 ### Functions
 
@@ -30,7 +26,21 @@ flip-sale: Toggles the sale state. Only callable by the contract owner.
 
 set-factor: Sets the multiplier for the number of tokens received after claiming treasure. Only callable by the contract owner.
 
-burn-token-supply: Burns a specified amount of tokens. Only callable by the contract owner.
+deposit-stx: Deposit STX in contract. Only callable by the contract owner.
+
+withdraw-stx: Withdrawal STX from contract. Only callable by the contract owner.
+
+send-stx: Send STX to player. Only callable by the contract owner.
+
+set-treasure-phase-1: Setting NFT ids that gives a treasure reward at the first rarity level.
+
+set-treasure-phase-2: Setting NFT ids that gives a treasure reward at the second rarity level.
+
+set-treasure-phase-3: Setting NFT ids that gives a treasure reward at the third rarity level.
+
+set-treasure-phase-4: Setting NFT ids that gives a treasure reward at the fourth rarity level.
+
+set-treasure-phase-5: Setting NFT ids that gives a treasure reward at the fifth rarity level.
 
 claim-five: Mints 5 NFTs.
 
@@ -59,6 +69,8 @@ burn-phase-5: Burns 5 NFTs of the fifth level.
 claim: Mints 1 NFT. Used internally in claim-five.
 
 mint: Called within claim during active sales.
+
+send-stx-to-winner: Send STX to winner player in claim treasure function.
 
 pick-id: Single number peak from VRF.
 
