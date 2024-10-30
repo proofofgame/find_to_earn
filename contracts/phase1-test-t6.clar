@@ -54,10 +54,6 @@
 (define-read-only (get-mint-limit)
   (ok (var-get mint-limit)))
 
-;; Get the mint price
-(define-read-only (get-mint-price)
-  (ok (var-get mint-price-phase1)))
-
 ;; Change the base uri (only contract owner)
 (define-public (set-base-uri (new-base-uri (string-ascii 80)))
   (begin
@@ -72,13 +68,6 @@
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (var-set mint-limit limit)
     (ok true)))
-
-;; Set mint price in uSTX (only contract owner)
-(define-public (set-mint-price-in-ustx (price1 uint))
-  (begin
-    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
-    (var-set mint-price-phase1 price1)
-    (ok (var-get mint-price-phase1))))
 
 ;; Freeze metadata
 (define-public (freeze-metadata)
