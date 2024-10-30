@@ -14,32 +14,32 @@ contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.commission-trait'
 [contracts.base-test-t6]
 path = 'contracts/base-test-t6.clar'
 clarity_version = 2
-epoch = 3.0
+epoch = 2.5
 
 [contracts.phase1-test-t6]
 path = 'contracts/phase1-test-t6.clar'
 clarity_version = 2
-epoch = 3.0
+epoch = 2.5
 
 [contracts.phase2-test-t6]
 path = 'contracts/phase2-test-t6.clar'
 clarity_version = 2
-epoch = 3.0
+epoch = 2.5
 
 [contracts.phase3-test-t6]
 path = 'contracts/phase3-test-t6.clar'
 clarity_version = 2
-epoch = 3.0
+epoch = 2.5
 
 [contracts.phase4-test-t6]
 path = 'contracts/phase4-test-t6.clar'
 clarity_version = 2
-epoch = 3.0
+epoch = 2.5
 
 [contracts.phase5-test-t6]
 path = 'contracts/phase5-test-t6.clar'
 clarity_version = 2
-epoch = 3.0
+epoch = 2.5
 
 [repl.analysis]
 passes = []
