@@ -100,7 +100,7 @@ claim: Mints 1 NFT. Used internally in claim-five.
 
 mint: Called within claim during active sales.
 
-send-stx-to-winner: Send STX to winner player in claim function chest/coins
+send-stx-to-winner: Send STX to winner player in claim function for treasure/chest/coins.
 
 pick-id: Single number peak from VRF.
 

@@ -229,7 +229,7 @@
   (let ((fx (var-get factor-1)))
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase1-test-t5 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
           (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-1 { id: id }))) true) ERR-NOT-CHEST)
+            (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-1 { id: id }))) true) ERR-NOT-TREASURE)
             (try! (send-stx-to-winner (* fx u500000) tx-sender))
             (map-set treasure-phase-1 { id: id } { claim: false})
             (print "Congrats")
@@ -240,7 +240,7 @@
   (let ((fx (var-get factor-1)))
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase2-test-t5 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
           (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-2 { id: id }))) true) ERR-NOT-CHEST)
+            (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-2 { id: id }))) true) ERR-NOT-TREASURE)
             (try! (send-stx-to-winner (* fx u500000) tx-sender))
             (map-set treasure-phase-2 { id: id } { claim: false})
             (print "Congrats")
@@ -251,7 +251,7 @@
   (let ((fx (var-get factor-1)))
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .phase3-test-t5 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
           (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-3 { id: id }))) true) ERR-NOT-CHEST)
+            (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-3 { id: id }))) true) ERR-NOT-TREASURE)
             (try! (send-stx-to-winner (* fx u500000) tx-sender))
             (map-set treasure-phase-3 { id: id } { claim: false})
             (print "Congrats")
@@ -264,7 +264,7 @@
     (try! (pick-id))
         (if (is-eq (mod (var-get picked-id) u2) u0)
           (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-1 { id: id }))) true) ERR-NOT-TREASURE)
+            (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-1 { id: id }))) true) ERR-NOT-CHEST)
             (try! (send-stx-to-winner (* fx u500000) tx-sender))
             (map-set chest-phase-1 { id: id } { claim: false})
             (print "Congrats")
@@ -281,7 +281,7 @@
     (try! (pick-id))
         (if (is-eq (mod (var-get picked-id) u2) u0)
           (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-2 { id: id }))) true) ERR-NOT-TREASURE)
+            (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-2 { id: id }))) true) ERR-NOT-CHEST)
             (try! (send-stx-to-winner (* fx u500000) tx-sender))
             (map-set chest-phase-2 { id: id } { claim: false})
             (print "Congrats")
@@ -298,7 +298,7 @@
     (try! (pick-id))
         (if (is-eq (mod (var-get picked-id) u2) u0)
           (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-3 { id: id }))) true) ERR-NOT-TREASURE)
+            (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-3 { id: id }))) true) ERR-NOT-CHEST)
             (try! (send-stx-to-winner (* fx u500000) tx-sender))
             (map-set chest-phase-3 { id: id } { claim: false})
             (print "Congrats")
@@ -421,7 +421,7 @@
     (try! (contract-call? .phase1-test-t5 mint new-owner))
     (ok true)))
 
-;; Send STX to winner player in claim function chest/coins
+;; Send STX to winner player in claim function for treasure/chest/coins
 (define-private (send-stx-to-winner (amount uint) (player principal))
   (begin
     (try! (as-contract (stx-transfer? amount tx-sender player)))
