@@ -4,19 +4,19 @@
 
 All operations performed by the user in the web interface (on the website) are executed in this contract.
 
-Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.base-test-t6
+Contract Address: SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-storyline-g1-base
 
 ### NFT Contracts
 
-Phase 1 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase1-test-t6
+Phase 1 Contract Address: SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-storyline-g1-phase1
 
-Phase 2 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase2-test-t6
+Phase 2 Contract Address: SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-storyline-g1-phase2
 
-Phase 3 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase3-test-t6
+Phase 3 Contract Address: SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-storyline-g1-phase3
 
-Phase 4 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase4-test-t6
+Phase 4 Contract Address: SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-storyline-g1-phase4
 
-Phase 5 Contract Address: ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase5-test-t6
+Phase 5 Contract Address: SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-storyline-g1-phase5
 
 ### Functions
 

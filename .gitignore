@@ -2,6 +2,7 @@
 **/settings/Mainnet.toml
 **/settings/Testnet.toml
 **/deployments/default.testnet-plan.yaml
+**/deployments/default.mainnet-plan.yaml
 **/tests
 **/sip009-nft
 **/coverage
