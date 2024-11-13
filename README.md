@@ -20,7 +20,9 @@ Phase 4 Contract Address:
 
 **Public**
 
-flip-sale: Toggles the sale state. Only callable by the contract owner.
+flip-wl-sale: Toggles the whitelist sale state. Only callable by the contract owner.
+
+flip-sale: Toggles the public sale state. Only callable by the contract owner.
 
 set-factor-1: Sets the multiplier for the number of tokens received after claiming treasure. Only callable by the contract owner.
 
