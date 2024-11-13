@@ -1,20 +1,20 @@
-# Skullcoin Storyline
+# Skullcoin Competitive
 
 ### Base Contract
 
 All operations performed by the user in the web interface (on the website) are executed in this contract.
 
-Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.base-test-t5?chain=testnet
+Contract Address: 
 
 ### NFT Contracts
 
-Phase 1 Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase1-test-t5?chain=testnet
+Phase 1 Contract Address: 
 
-Phase 2 Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase2-test-t5?chain=testnet
+Phase 2 Contract Address: 
 
-Phase 3 Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase3-test-t5?chain=testnet
+Phase 3 Contract Address: 
 
-Phase 4 Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.phase4-test-t5?chain=testnet
+Phase 4 Contract Address: 
 
 ### Functions
 

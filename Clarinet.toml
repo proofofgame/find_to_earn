@@ -6,36 +6,36 @@ telemetry = true
 cache_dir = '.\.cache'
 
 [[project.requirements]]
-contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.nft-trait'
+contract_id = 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait'
 
 [[project.requirements]]
-contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.commission-trait'
+contract_id = 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait'
 
 [[project.requirements]]
-contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait-ft-standard'
+contract_id = 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard'
 
-[contracts.base-test-t5]
-path = 'contracts/base-test-t5.clar'
+[contracts.skullcoin-competitive-g1-base]
+path = 'contracts/skullcoin-competitive-g1-base.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.phase1-test-t5]
-path = 'contracts/phase1-test-t5.clar'
+[contracts.skullcoin-competitive-g1-phase1]
+path = 'contracts/skullcoin-competitive-g1-phase1.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.phase2-test-t5]
-path = 'contracts/phase2-test-t5.clar'
+[contracts.skullcoin-competitive-g1-phase2]
+path = 'contracts/skullcoin-competitive-g1-phase2.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.phase3-test-t5]
-path = 'contracts/phase3-test-t5.clar'
+[contracts.skullcoin-competitive-g1-phase3]
+path = 'contracts/skullcoin-competitive-g1-phase3.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.phase4-test-t5]
-path = 'contracts/phase4-test-t5.clar'
+[contracts.skullcoin-competitive-g1-phase4]
+path = 'contracts/skullcoin-competitive-g1-phase4.clar'
 clarity_version = 2
 epoch = 2.5
 
