@@ -1,3 +1,6 @@
+;; Skullcoin | Storyline | Chapter #1 | v.1.0.0
+;; skullco.in
+
 ;; Traits
 (impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
 (use-trait commission-trait 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait.commission)
