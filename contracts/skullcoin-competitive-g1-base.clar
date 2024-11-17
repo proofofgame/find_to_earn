@@ -198,30 +198,6 @@
     (try! (claim))
     (ok true)))
 
-;; Claim 2 NFT
-(define-public (claim-two)
-  (begin
-    (try! (claim))
-    (try! (claim))
-    (ok true)))
-
-;; Claim 3 NFT
-(define-public (claim-three)
-  (begin
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (ok true)))
-
-;; Claim 4 NFT
-(define-public (claim-four)
-  (begin
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (ok true)))
-
 ;; Claim 5 NFT
 (define-public (claim-five)
   (begin
