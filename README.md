@@ -84,12 +84,6 @@ claim-chest-phase-2: Checks the chest at the second rarity level.
 
 claim-chest-phase-3: Checks the chest at the third rarity level.
 
-claim-coins-phase-1: Checks the coins at the first rarity level.
-
-claim-coins-phase-2: Checks the coins at the second rarity level.
-
-claim-coins-phase-3: Checks the coins at the third rarity level.
-
 burn-phase-1: Burns 5 NFTs of the first level.
 
 burn-phase-2: Burns 5 NFTs of the second level.

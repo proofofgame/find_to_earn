@@ -307,57 +307,6 @@
             (print "Not this time")
             (ok (var-get picked-id))))))
 
-;; Claim coins / Phase 1
-(define-public (claim-coins-phase-1 (id uint))
-  (let ((fx (var-get factor-3)))
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (try! (pick-id))
-        (if (is-eq (mod (var-get picked-id) u2) u0)
-          (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? coins-phase-1 { id: id }))) true) ERR-NOT-COINS)
-            (try! (send-stx-to-winner (* fx u500000) tx-sender))
-            (map-set coins-phase-1 { id: id } { claim: false})
-            (print "Congrats")
-            (ok (var-get picked-id)))
-          (begin
-            (map-set coins-phase-1 { id: id } { claim: false})
-            (print "Not this time")
-            (ok (var-get picked-id))))))
-
-;; Claim coins / Phase 2
-(define-public (claim-coins-phase-2 (id uint))
-  (let ((fx (var-get factor-3)))
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (try! (pick-id))
-        (if (is-eq (mod (var-get picked-id) u2) u0)
-          (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? coins-phase-2 { id: id }))) true) ERR-NOT-COINS)
-            (try! (send-stx-to-winner (* fx u500000) tx-sender))
-            (map-set coins-phase-2 { id: id } { claim: false})
-            (print "Congrats")
-            (ok (var-get picked-id)))
-          (begin
-            (map-set coins-phase-2 { id: id } { claim: false})
-            (print "Not this time")
-            (ok (var-get picked-id))))))
-
-;; Claim coins / Phase 3
-(define-public (claim-coins-phase-3 (id uint))
-  (let ((fx (var-get factor-3)))
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (try! (pick-id))
-        (if (is-eq (mod (var-get picked-id) u2) u0)
-          (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? coins-phase-3 { id: id }))) true) ERR-NOT-COINS)
-            (try! (send-stx-to-winner (* fx u500000) tx-sender))
-            (map-set coins-phase-3 { id: id } { claim: false})
-            (print "Congrats")
-            (ok (var-get picked-id)))
-          (begin
-            (map-set coins-phase-3 { id: id } { claim: false})
-            (print "Not this time")
-            (ok (var-get picked-id))))))
-
 ;; Burn 5 NFTs / Phase 1
 (define-public (burn-phase-1 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
   (begin
