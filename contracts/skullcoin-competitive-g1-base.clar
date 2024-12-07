@@ -436,7 +436,7 @@
   (ok true)))
 
 ;; Internal - Send SIP-010 tokens to winner player in claim function for tokens NFTs
-(define-public (send-ft-to-winner (asset <ft-trait>) (amount uint) (player principal))
+(define-private (send-ft-to-winner (asset <ft-trait>) (amount uint) (player principal))
   (begin
     (try! (as-contract (contract-call? asset transfer amount tx-sender player none)))
   (ok true)))
