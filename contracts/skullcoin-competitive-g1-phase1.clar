@@ -12,7 +12,7 @@
 
 ;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
-(define-constant WALLET 'ST...) ;; change to maiinet wallet
+(define-constant WALLET 'SP224YKZ55F25SBYVR8HZXQ7G89CC8WYKAGMZHQ0A)
 (define-constant ERR-SOLD-OUT (err u200))
 (define-constant ERR-WRONG-COMMISSION (err u201))
 (define-constant ERR-NOT-AUTHORIZED (err u202))

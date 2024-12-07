@@ -11,17 +11,15 @@
 (define-constant ERR-SALE-NOT-ACTIVE (err u101))
 (define-constant ERR-NOT-OWNER (err u102))
 (define-constant ERR-NOT-TREASURE (err u103))
-(define-constant ERR-NOT-COINS (err u104))
-(define-constant ERR-NOT-CHEST (err u105))
-(define-constant REACHED-BLOCK-PICK-LIMIT (err u106))
-(define-constant ERR-NO-WL-REMAINING (err u107))
+(define-constant ERR-NOT-CHEST (err u104))
+(define-constant ERR-NOT-TOKENS (err u105))
+(define-constant ERR-NOT-STX (err u106))
+(define-constant REACHED-BLOCK-PICK-LIMIT (err u107))
+(define-constant ERR-NO-WL-REMAINING (err u108))
 
 ;; Variables
 (define-data-var wl-sale-active bool false)
 (define-data-var sale-active bool false)
-(define-data-var factor-1 uint u2)
-(define-data-var factor-2 uint u2)
-(define-data-var factor-3 uint u1)
 (define-data-var last-block uint u0)
 (define-data-var byte-id uint u0)
 (define-data-var picked-id uint u0)
@@ -35,9 +33,12 @@
 (define-map chest-phase-1 { id: uint} {claim: bool})
 (define-map chest-phase-2 { id: uint} {claim: bool})
 (define-map chest-phase-3 { id: uint} {claim: bool})
-(define-map coins-phase-1 { id: uint} {claim: bool})
-(define-map coins-phase-2 { id: uint} {claim: bool})
-(define-map coins-phase-3 { id: uint} {claim: bool})
+(define-map tokens-phase-1 { id: uint} {claim: bool})
+(define-map tokens-phase-2 { id: uint} {claim: bool})
+(define-map tokens-phase-3 { id: uint} {claim: bool})
+(define-map stx-phase-1 { id: uint} {claim: bool})
+(define-map stx-phase-2 { id: uint} {claim: bool})
+(define-map stx-phase-3 { id: uint} {claim: bool})
 
 ;; Get whitelist balance
 (define-read-only (get-wl-balance (account principal))
@@ -66,27 +67,6 @@
     (var-set sale-active (not (var-get sale-active)))
     (ok (var-get sale-active))))
 
-;; Set factor #1 (only contract owner)
-(define-public (set-factor-1 (value uint))
-  (begin
-    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
-    (var-set factor-1 value)
-    (ok true)))
-
-;; Set factor #2 (only contract owner)
-(define-public (set-factor-2 (value uint))
-  (begin
-    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
-    (var-set factor-2 value)
-    (ok true)))
-
-;; Set factor #3 (only contract owner)
-(define-public (set-factor-3 (value uint))
-  (begin
-    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
-    (var-set factor-3 value)
-    (ok true)))
-
 ;; Deposit SIP-010 tokens in contract (only contract owner)
 (define-public (deposit-ft (asset <ft-trait>) (amount uint))
   (begin
@@ -99,13 +79,6 @@
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (try! (as-contract (contract-call? asset transfer amount tx-sender CONTRACT-OWNER none)))
-  (ok true)))
-
-;; Send SIP-010 tokens to player (only contract owner)
-(define-public (send-ft (asset <ft-trait>) (amount uint) (player principal))
-  (begin
-    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
-    (try! (as-contract (contract-call? asset transfer amount tx-sender player none)))
   (ok true)))
 
 ;; Deposit STX in contract (only contract owner)
@@ -122,11 +95,11 @@
     (try! (as-contract (stx-transfer? amount tx-sender CONTRACT-OWNER)))
   (ok true)))
 
-;; Send STX to player (only contract owner)
-(define-public (send-stx (amount uint) (player principal))
+;; Set whitelist wallets (only contract owner)
+(define-public (set-wl-wallets (wallet principal) (amount uint))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
-    (try! (as-contract (stx-transfer? amount tx-sender player)))
+    (map-set wl-count wallet amount)
   (ok true)))
 
 ;; Set treasures ids / Phase 1 (only contract owner)
@@ -171,25 +144,46 @@
     (map-set chest-phase-3 { id: nft-id } { claim: status})
   (ok true)))
 
-;; Set coins ids / Phase 1 (only contract owner)
-(define-public (set-coins-phase-1 (nft-id uint) (status bool))
+;; Set tokens ids / Phase 1 (only contract owner)
+(define-public (set-tokens-phase-1 (nft-id uint) (status bool))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
-    (map-set coins-phase-1 { id: nft-id } { claim: status})
+    (map-set tokens-phase-1 { id: nft-id } { claim: status})
   (ok true)))
 
-;; Set coins ids / Phase 2 (only contract owner)
-(define-public (set-coins-phase-2 (nft-id uint) (status bool))
+;; Set tokens ids / Phase 2 (only contract owner)
+(define-public (set-tokens-phase-2 (nft-id uint) (status bool))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
-    (map-set coins-phase-2 { id: nft-id } { claim: status})
+    (map-set tokens-phase-2 { id: nft-id } { claim: status})
   (ok true)))
 
-;; Set coins ids / Phase 3 (only contract owner)
-(define-public (set-coins-phase-3 (nft-id uint) (status bool))
+;; Set tokens ids / Phase 3 (only contract owner)
+(define-public (set-tokens-phase-3 (nft-id uint) (status bool))
   (begin
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
-    (map-set coins-phase-3 { id: nft-id } { claim: status})
+    (map-set tokens-phase-3 { id: nft-id } { claim: status})
+  (ok true)))
+
+;; Set stx reward ids / Phase 1 (only contract owner)
+(define-public (set-stx-phase-1 (nft-id uint) (status bool))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (map-set stx-phase-1 { id: nft-id } { claim: status})
+  (ok true)))
+
+;; Set stx reward ids / Phase 2 (only contract owner)
+(define-public (set-stx-phase-2 (nft-id uint) (status bool))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (map-set stx-phase-2 { id: nft-id } { claim: status})
+  (ok true)))
+
+;; Set stx reward ids / Phase 3 (only contract owner)
+(define-public (set-stx-phase-3 (nft-id uint) (status bool))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (map-set stx-phase-3 { id: nft-id } { claim: status})
   (ok true)))
 
 ;; Claim 1 NFT
@@ -224,47 +218,44 @@
     (ok true)))
 
 ;; Claim treasure / Phase 1
-(define-public (claim-treasure-phase-1 (id uint))
-  (let ((fx (var-get factor-1)))
+(define-public (claim-treasure-phase-1 (id uint) (amount uint))
+  (begin
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-          (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-1 { id: id }))) true) ERR-NOT-TREASURE)
-            (try! (send-stx-to-winner (* fx u500000) tx-sender))
-            (map-set treasure-phase-1 { id: id } { claim: false})
-            (print "Congrats")
-          (ok true))))
+    (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-1 { id: id }))) true) ERR-NOT-TREASURE)
+    (try! (send-stx-to-winner amount tx-sender))
+    (map-set treasure-phase-1 { id: id } { claim: false})
+    (print "Congrats")
+  (ok true)))
 
 ;; Claim treasure / Phase 2
-(define-public (claim-treasure-phase-2 (id uint))
-  (let ((fx (var-get factor-1)))
+(define-public (claim-treasure-phase-2 (id uint) (amount uint))
+  (begin
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-          (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-2 { id: id }))) true) ERR-NOT-TREASURE)
-            (try! (send-stx-to-winner (* fx u500000) tx-sender))
-            (map-set treasure-phase-2 { id: id } { claim: false})
-            (print "Congrats")
-          (ok true))))
+    (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-2 { id: id }))) true) ERR-NOT-TREASURE)
+    (try! (send-stx-to-winner amount tx-sender))
+    (map-set treasure-phase-2 { id: id } { claim: false})
+    (print "Congrats")
+  (ok true)))
 
 ;; Claim treasure / Phase 3
-(define-public (claim-treasure-phase-3 (id uint))
-  (let ((fx (var-get factor-1)))
+(define-public (claim-treasure-phase-3 (id uint) (amount uint))
+  (begin
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-          (begin
-            (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-3 { id: id }))) true) ERR-NOT-TREASURE)
-            (try! (send-stx-to-winner (* fx u500000) tx-sender))
-            (map-set treasure-phase-3 { id: id } { claim: false})
-            (print "Congrats")
-          (ok true))))
+    (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-3 { id: id }))) true) ERR-NOT-TREASURE)
+    (try! (send-stx-to-winner amount tx-sender))
+    (map-set treasure-phase-3 { id: id } { claim: false})
+    (print "Congrats")
+  (ok true)))
 
 ;; Claim chest / Phase 1
-(define-public (claim-chest-phase-1 (id uint))
-  (let ((fx (var-get factor-2)))
+(define-public (claim-chest-phase-1 (id uint) (amount uint))
+  (begin
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (try! (pick-id))
         (if (is-eq (mod (var-get picked-id) u2) u0)
           (begin
             (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-1 { id: id }))) true) ERR-NOT-CHEST)
-            (try! (send-stx-to-winner (* fx u500000) tx-sender))
+            (try! (send-stx-to-winner amount tx-sender))
             (map-set chest-phase-1 { id: id } { claim: false})
             (print "Congrats")
             (ok (var-get picked-id)))
@@ -274,14 +265,14 @@
             (ok (var-get picked-id))))))
 
 ;; Claim chest / Phase 2
-(define-public (claim-chest-phase-2 (id uint))
-  (let ((fx (var-get factor-2)))
+(define-public (claim-chest-phase-2 (id uint) (amount uint))
+  (begin
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (try! (pick-id))
         (if (is-eq (mod (var-get picked-id) u2) u0)
           (begin
             (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-2 { id: id }))) true) ERR-NOT-CHEST)
-            (try! (send-stx-to-winner (* fx u500000) tx-sender))
+            (try! (send-stx-to-winner amount tx-sender))
             (map-set chest-phase-2 { id: id } { claim: false})
             (print "Congrats")
             (ok (var-get picked-id)))
@@ -291,14 +282,14 @@
             (ok (var-get picked-id))))))
 
 ;; Claim chest / Phase 3
-(define-public (claim-chest-phase-3 (id uint))
-  (let ((fx (var-get factor-2)))
+(define-public (claim-chest-phase-3 (id uint) (amount uint))
+  (begin
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (try! (pick-id))
         (if (is-eq (mod (var-get picked-id) u2) u0)
           (begin
             (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-3 { id: id }))) true) ERR-NOT-CHEST)
-            (try! (send-stx-to-winner (* fx u500000) tx-sender))
+            (try! (send-stx-to-winner amount tx-sender))
             (map-set chest-phase-3 { id: id } { claim: false})
             (print "Congrats")
             (ok (var-get picked-id)))
@@ -306,6 +297,66 @@
             (map-set chest-phase-3 { id: id } { claim: false})
             (print "Not this time")
             (ok (var-get picked-id))))))
+
+;; Claim STX / Phase 1
+(define-public (claim-stx-phase-1 (id uint) (amount uint))
+  (begin
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (get claim (unwrap-panic (map-get? stx-phase-1 { id: id }))) true) ERR-NOT-STX)
+    (try! (send-stx-to-winner amount tx-sender))
+    (map-set stx-phase-1 { id: id } { claim: false})
+    (print "Congrats")
+  (ok true)))
+
+;; Claim STX / Phase 2
+(define-public (claim-stx-phase-2 (id uint) (amount uint))
+  (begin
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (get claim (unwrap-panic (map-get? stx-phase-2 { id: id }))) true) ERR-NOT-STX)
+    (try! (send-stx-to-winner amount tx-sender))
+    (map-set stx-phase-2 { id: id } { claim: false})
+    (print "Congrats")
+  (ok true)))
+
+;; Claim STX / Phase 3
+(define-public (claim-stx-phase-3 (id uint) (amount uint))
+  (begin
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (get claim (unwrap-panic (map-get? stx-phase-3 { id: id }))) true) ERR-NOT-STX)
+    (try! (send-stx-to-winner amount tx-sender))
+    (map-set stx-phase-3 { id: id } { claim: false})
+    (print "Congrats")
+  (ok true)))
+
+;; Claim FT / Phase 1
+(define-public (claim-tokens-phase-1 (asset <ft-trait>) (id uint) (amount uint))
+  (begin
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (get claim (unwrap-panic (map-get? tokens-phase-1 { id: id }))) true) ERR-NOT-TOKENS)
+    (try! (send-ft-to-winner asset amount tx-sender))
+    (map-set tokens-phase-1 { id: id } { claim: false})
+    (print "Congrats")
+  (ok true)))
+
+;; Claim FT / Phase 2
+(define-public (claim-tokens-phase-2 (asset <ft-trait>) (id uint) (amount uint))
+  (begin
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (get claim (unwrap-panic (map-get? tokens-phase-2 { id: id }))) true) ERR-NOT-TOKENS)
+    (try! (send-ft-to-winner asset amount tx-sender))
+    (map-set tokens-phase-2 { id: id } { claim: false})
+    (print "Congrats")
+  (ok true)))
+
+;; Claim FT / Phase 3
+(define-public (claim-tokens-phase-3 (asset <ft-trait>) (id uint) (amount uint))
+  (begin
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (get claim (unwrap-panic (map-get? tokens-phase-3 { id: id }))) true) ERR-NOT-TOKENS)
+    (try! (send-ft-to-winner asset amount tx-sender))
+    (map-set tokens-phase-3 { id: id } { claim: false})
+    (print "Congrats")
+  (ok true)))
 
 ;; Burn 5 NFTs / Phase 1
 (define-public (burn-phase-1 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
@@ -357,7 +408,7 @@
       (try! (contract-call? .skullcoin-competitive-g1-phase4 mint tx-sender))
       (ok true)))
 
-;; Claim NFT
+;; Internal - Claim NFT
 (define-private (claim)
   (if (var-get wl-sale-active)
     (wl-mint tx-sender)
@@ -378,13 +429,19 @@
     (try! (contract-call? .skullcoin-competitive-g1-phase1 mint new-owner))
     (ok true)))
 
-;; Send STX to winner player in claim function for treasure/chest/coins
+;; Internal - Send STX to winner player in claim function for treasure/chest/stx NFTs
 (define-private (send-stx-to-winner (amount uint) (player principal))
   (begin
     (try! (as-contract (stx-transfer? amount tx-sender player)))
   (ok true)))
 
-;; Pick id with RNG based on VRF
+;; Internal - Send SIP-010 tokens to winner player in claim function for tokens NFTs
+(define-public (send-ft-to-winner (asset <ft-trait>) (amount uint) (player principal))
+  (begin
+    (try! (as-contract (contract-call? asset transfer amount tx-sender player none)))
+  (ok true)))
+
+;; Internal - Pick id with RNG based on VRF
 (define-private (pick-id)
   (let ((vrf (var-get last-vrf))
         (b-idx (var-get byte-id)))
@@ -401,7 +458,7 @@
         (var-set byte-id u1)
         (ok (var-get picked-id))))))
 
-;; Set VRF from previous block
+;; Internal - Set VRF from previous block
 (define-private (set-vrf)    
     (var-set last-vrf (sha512 (unwrap-panic (get-block-info? vrf-seed (- block-height u1))))))
 
@@ -410,6 +467,3 @@
 (as-contract (contract-call? .skullcoin-competitive-g1-phase2 set-mint-address))
 (as-contract (contract-call? .skullcoin-competitive-g1-phase3 set-mint-address))
 (as-contract (contract-call? .skullcoin-competitive-g1-phase4 set-mint-address))
-
-;; WL
-(map-set wl-count 'SP... u5)
