@@ -14,28 +14,28 @@ contract_id = 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait'
 [[project.requirements]]
 contract_id = 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard'
 
-[contracts.skullcoin-competitive-g1-base]
-path = 'contracts/skullcoin-competitive-g1-base.clar'
+[contracts.skullcoin-competitive-g2-base]
+path = 'contracts/skullcoin-competitive-g2-base.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g1-phase1]
-path = 'contracts/skullcoin-competitive-g1-phase1.clar'
+[contracts.skullcoin-competitive-g2-phase1]
+path = 'contracts/skullcoin-competitive-g2-phase1.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g1-phase2]
-path = 'contracts/skullcoin-competitive-g1-phase2.clar'
+[contracts.skullcoin-competitive-g2-phase2]
+path = 'contracts/skullcoin-competitive-g2-phase2.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g1-phase3]
-path = 'contracts/skullcoin-competitive-g1-phase3.clar'
+[contracts.skullcoin-competitive-g2-phase3]
+path = 'contracts/skullcoin-competitive-g2-phase3.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g1-phase4]
-path = 'contracts/skullcoin-competitive-g1-phase4.clar'
+[contracts.skullcoin-competitive-g2-phase4]
+path = 'contracts/skullcoin-competitive-g2-phase4.clar'
 clarity_version = 2
 epoch = 2.5
 

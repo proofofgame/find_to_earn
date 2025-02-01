@@ -229,7 +229,7 @@
 ;; Claim treasure / Phase 1
 (define-public (claim-treasure-phase-1 (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-1 { id: id }))) true) ERR-NOT-TREASURE-OR-CLAIMED)
     (try! (send-stx-to-winner amount tx-sender))
     (map-set treasure-phase-1 { id: id } { claim: false})
@@ -240,7 +240,7 @@
 ;; Claim treasure / Phase 2
 (define-public (claim-treasure-phase-2 (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-2 { id: id }))) true) ERR-NOT-TREASURE-OR-CLAIMED)
     (try! (send-stx-to-winner amount tx-sender))
     (map-set treasure-phase-2 { id: id } { claim: false})
@@ -251,7 +251,7 @@
 ;; Claim treasure / Phase 3
 (define-public (claim-treasure-phase-3 (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? treasure-phase-3 { id: id }))) true) ERR-NOT-TREASURE-OR-CLAIMED)
     (try! (send-stx-to-winner amount tx-sender))
     (map-set treasure-phase-3 { id: id } { claim: false})
@@ -262,7 +262,7 @@
 ;; Claim chest / Phase 1
 (define-public (claim-chest-phase-1 (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-1 { id: id }))) true) ERR-NOT-CHEST-OR-CLAIMED)
     (try! (pick-id))
         (if (is-eq (mod (var-get picked-id) u2) u0)
@@ -281,7 +281,7 @@
 ;; Claim chest / Phase 2
 (define-public (claim-chest-phase-2 (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-2 { id: id }))) true) ERR-NOT-CHEST-OR-CLAIMED)
     (try! (pick-id))
         (if (is-eq (mod (var-get picked-id) u2) u0)
@@ -300,7 +300,7 @@
 ;; Claim chest / Phase 3
 (define-public (claim-chest-phase-3 (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? chest-phase-3 { id: id }))) true) ERR-NOT-CHEST-OR-CLAIMED)
     (try! (pick-id))
         (if (is-eq (mod (var-get picked-id) u2) u0)
@@ -319,7 +319,7 @@
 ;; Claim STX / Phase 1
 (define-public (claim-stx-phase-1 (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? stx-phase-1 { id: id }))) true) ERR-NOT-STX-OR-CLAIMED)
     (try! (send-stx-to-winner amount tx-sender))
     (map-set stx-phase-1 { id: id } { claim: false})
@@ -330,7 +330,7 @@
 ;; Claim STX / Phase 2
 (define-public (claim-stx-phase-2 (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? stx-phase-2 { id: id }))) true) ERR-NOT-STX-OR-CLAIMED)
     (try! (send-stx-to-winner amount tx-sender))
     (map-set stx-phase-2 { id: id } { claim: false})
@@ -341,7 +341,7 @@
 ;; Claim STX / Phase 3
 (define-public (claim-stx-phase-3 (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? stx-phase-3 { id: id }))) true) ERR-NOT-STX-OR-CLAIMED)
     (try! (send-stx-to-winner amount tx-sender))
     (map-set stx-phase-3 { id: id } { claim: false})
@@ -352,7 +352,7 @@
 ;; Claim FT / Phase 1
 (define-public (claim-tokens-phase-1 (asset <ft-trait>) (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase1 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? tokens-phase-1 { id: id }))) true) ERR-NOT-TOKENS-OR-CLAIMED)
     (try! (send-ft-to-winner asset amount tx-sender))
     (map-set tokens-phase-1 { id: id } { claim: false})
@@ -363,7 +363,7 @@
 ;; Claim FT / Phase 2
 (define-public (claim-tokens-phase-2 (asset <ft-trait>) (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase2 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? tokens-phase-2 { id: id }))) true) ERR-NOT-TOKENS-OR-CLAIMED)
     (try! (send-ft-to-winner asset amount tx-sender))
     (map-set tokens-phase-2 { id: id } { claim: false})
@@ -374,7 +374,7 @@
 ;; Claim FT / Phase 3
 (define-public (claim-tokens-phase-3 (asset <ft-trait>) (id uint) (amount uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase3 get-owner id) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (get claim (unwrap-panic (map-get? tokens-phase-3 { id: id }))) true) ERR-NOT-TOKENS-OR-CLAIMED)
     (try! (send-ft-to-winner asset amount tx-sender))
     (map-set tokens-phase-3 { id: id } { claim: false})
@@ -385,51 +385,51 @@
 ;; Burn 5 NFTs / Phase 1
 (define-public (burn-phase-1 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id1) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id2) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id3) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id4) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase1 get-owner id5) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (try! (contract-call? .skullcoin-competitive-g1-phase1 transfer id1 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase1 transfer id2 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase1 transfer id3 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase1 transfer id4 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase1 transfer id5 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase2 mint tx-sender))
-    (try! (contract-call? .skullcoin-competitive-g1-phase2 mint tx-sender))
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase1 get-owner id1) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase1 get-owner id2) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase1 get-owner id3) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase1 get-owner id4) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase1 get-owner id5) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (try! (contract-call? .skullcoin-competitive-g2-phase1 transfer id1 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase1 transfer id2 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase1 transfer id3 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase1 transfer id4 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase1 transfer id5 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase2 mint tx-sender))
+    (try! (contract-call? .skullcoin-competitive-g2-phase2 mint tx-sender))
   (ok true)))
 
 ;; Burn 5 NFTs / Phase 2
 (define-public (burn-phase-2 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id1) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id2) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id3) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id4) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase2 get-owner id5) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (try! (contract-call? .skullcoin-competitive-g1-phase2 transfer id1 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase2 transfer id2 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase2 transfer id3 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase2 transfer id4 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase2 transfer id5 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase3 mint tx-sender))
-    (try! (contract-call? .skullcoin-competitive-g1-phase3 mint tx-sender))
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase2 get-owner id1) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase2 get-owner id2) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase2 get-owner id3) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase2 get-owner id4) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase2 get-owner id5) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (try! (contract-call? .skullcoin-competitive-g2-phase2 transfer id1 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase2 transfer id2 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase2 transfer id3 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase2 transfer id4 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase2 transfer id5 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase3 mint tx-sender))
+    (try! (contract-call? .skullcoin-competitive-g2-phase3 mint tx-sender))
   (ok true)))
 
 ;; Burn 5 NFTs / Phase 3
 (define-public (burn-phase-3 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
   (begin
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id1) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id2) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id3) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id4) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g1-phase3 get-owner id5) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
-    (try! (contract-call? .skullcoin-competitive-g1-phase3 transfer id1 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase3 transfer id2 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase3 transfer id3 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase3 transfer id4 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase3 transfer id5 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g1-phase4 mint tx-sender))
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase3 get-owner id1) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase3 get-owner id2) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase3 get-owner id3) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase3 get-owner id4) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-g2-phase3 get-owner id5) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
+    (try! (contract-call? .skullcoin-competitive-g2-phase3 transfer id1 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase3 transfer id2 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase3 transfer id3 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase3 transfer id4 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase3 transfer id5 tx-sender BURN-WALLET))
+    (try! (contract-call? .skullcoin-competitive-g2-phase4 mint tx-sender))
   (ok true)))
 
 ;; Internal - Claim NFT
@@ -443,14 +443,14 @@
   (let ((wl-balance (get-wl-balance new-owner)))
     (asserts! (> wl-balance u0) ERR-NO-WL-REMAINING)
     (map-set wl-count new-owner (- wl-balance u1))
-    (try! (contract-call? .skullcoin-competitive-g1-phase1 mint new-owner))
+    (try! (contract-call? .skullcoin-competitive-g2-phase1 mint new-owner))
   (ok true)))
 
 ;; Internal - Mint NFT via public
 (define-private (mint (new-owner principal))
   (begin
     (asserts! (var-get sale-active) ERR-SALE-NOT-ACTIVE)
-    (try! (contract-call? .skullcoin-competitive-g1-phase1 mint new-owner))
+    (try! (contract-call? .skullcoin-competitive-g2-phase1 mint new-owner))
   (ok true)))
 
 ;; Internal - Send STX to winner player in claim function for treasure/chest/stx NFTs
@@ -487,7 +487,7 @@
   (var-set last-vrf (sha512 (unwrap-panic (get-block-info? vrf-seed (- block-height u1))))))
 
 ;; Register this contract as allowed to mint
-(as-contract (contract-call? .skullcoin-competitive-g1-phase1 set-mint-address))
-(as-contract (contract-call? .skullcoin-competitive-g1-phase2 set-mint-address))
-(as-contract (contract-call? .skullcoin-competitive-g1-phase3 set-mint-address))
-(as-contract (contract-call? .skullcoin-competitive-g1-phase4 set-mint-address))
+(as-contract (contract-call? .skullcoin-competitive-g2-phase1 set-mint-address))
+(as-contract (contract-call? .skullcoin-competitive-g2-phase2 set-mint-address))
+(as-contract (contract-call? .skullcoin-competitive-g2-phase3 set-mint-address))
+(as-contract (contract-call? .skullcoin-competitive-g2-phase4 set-mint-address))
