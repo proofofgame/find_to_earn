@@ -2,7 +2,7 @@
 ;; skullco.in
 
 ;; TODO
-;; 1. Random for mint phase 1
+;; 1. Random mint
 
 ;; Traits
 (use-trait ft-trait 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
@@ -234,7 +234,13 @@
     (try! (send-stx-to-winner amount tx-sender))
     (map-set treasure-phase-1 { id: id } { claim: false})
     (map-set awards { phase: u1, id: id } { type: "treasure" , claim: false })
-    (print "Congrats")
+    (print {
+      result: "congrats",
+      asset: "stx",
+      amount: amount,
+      nft-id: id,
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim treasure / Phase 2
@@ -245,7 +251,13 @@
     (try! (send-stx-to-winner amount tx-sender))
     (map-set treasure-phase-2 { id: id } { claim: false})
     (map-set awards { phase: u2, id: id } { type: "treasure" , claim: false })
-    (print "Congrats")
+    (print {
+      result: "congrats",
+      asset: "stx",
+      amount: amount,
+      nft-id: id,
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim treasure / Phase 3
@@ -256,7 +268,13 @@
     (try! (send-stx-to-winner amount tx-sender))
     (map-set treasure-phase-3 { id: id } { claim: false})
     (map-set awards { phase: u3, id: id } { type: "treasure" , claim: false })
-    (print "Congrats")
+    (print {
+      result: "congrats",
+      asset: "stx",
+      amount: amount,
+      nft-id: id,
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim chest / Phase 1
@@ -270,12 +288,24 @@
             (try! (send-stx-to-winner amount tx-sender))
             (map-set chest-phase-1 { id: id } { claim: false})
             (map-set awards { phase: u1, id: id } { type: "chest" , claim: false })
-            (print "Congrats")
+            (print {
+              result: "congrats",
+              asset: "stx",
+              amount: amount,
+              nft-id: id,
+              user: contract-caller
+            })
           (ok (var-get picked-id)))
           (begin
             (map-set chest-phase-1 { id: id } { claim: false})
             (map-set awards { phase: u1, id: id } { type: "chest" , claim: false })
-            (print "Not this time")
+            (print {
+              result: "not this time",
+              asset: "stx",
+              amount: amount,
+              nft-id: id,
+              user: contract-caller
+            })
           (ok (var-get picked-id))))))
 
 ;; Claim chest / Phase 2
@@ -289,12 +319,24 @@
             (try! (send-stx-to-winner amount tx-sender))
             (map-set chest-phase-2 { id: id } { claim: false})
             (map-set awards { phase: u2, id: id } { type: "chest" , claim: false })
-            (print "Congrats")
+            (print {
+              result: "congrats",
+              asset: "stx",
+              amount: amount,
+              nft-id: id,
+              user: contract-caller
+            })
           (ok (var-get picked-id)))
           (begin
             (map-set chest-phase-2 { id: id } { claim: false})
             (map-set awards { phase: u2, id: id } { type: "chest" , claim: false })
-            (print "Not this time")
+            (print {
+              result: "not this time",
+              asset: "stx",
+              amount: amount,
+              nft-id: id,
+              user: contract-caller
+            })
           (ok (var-get picked-id))))))
 
 ;; Claim chest / Phase 3
@@ -308,12 +350,24 @@
             (try! (send-stx-to-winner amount tx-sender))
             (map-set chest-phase-3 { id: id } { claim: false})
             (map-set awards { phase: u3, id: id } { type: "chest" , claim: false })
-            (print "Congrats")
+            (print {
+              result: "congrats",
+              asset: "stx",
+              amount: amount,
+              nft-id: id,
+              user: contract-caller
+            })
           (ok (var-get picked-id)))
           (begin
             (map-set chest-phase-3 { id: id } { claim: false})
             (map-set awards { phase: u3, id: id } { type: "chest" , claim: false })
-            (print "Not this time")
+            (print {
+              result: "not this time",
+              asset: "stx",
+              amount: amount,
+              nft-id: id,
+              user: contract-caller
+            })
           (ok (var-get picked-id))))))
 
 ;; Claim STX / Phase 1
@@ -324,7 +378,13 @@
     (try! (send-stx-to-winner amount tx-sender))
     (map-set stx-phase-1 { id: id } { claim: false})
     (map-set awards { phase: u1, id: id } { type: "stx" , claim: false })
-    (print "Congrats")
+    (print {
+      result: "congrats",
+      asset: "stx",
+      amount: amount,
+      nft-id: id,
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim STX / Phase 2
@@ -335,7 +395,13 @@
     (try! (send-stx-to-winner amount tx-sender))
     (map-set stx-phase-2 { id: id } { claim: false})
     (map-set awards { phase: u2, id: id } { type: "stx" , claim: false })
-    (print "Congrats")
+    (print {
+      result: "congrats",
+      asset: "stx",
+      amount: amount,
+      nft-id: id,
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim STX / Phase 3
@@ -346,7 +412,13 @@
     (try! (send-stx-to-winner amount tx-sender))
     (map-set stx-phase-3 { id: id } { claim: false})
     (map-set awards { phase: u3, id: id } { type: "stx" , claim: false })
-    (print "Congrats")
+    (print {
+      result: "congrats",
+      asset: "stx",
+      amount: amount,
+      nft-id: id,
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim FT / Phase 1
@@ -357,7 +429,13 @@
     (try! (send-ft-to-winner asset amount tx-sender))
     (map-set tokens-phase-1 { id: id } { claim: false})
     (map-set awards { phase: u1, id: id } { type: "tokens" , claim: false })
-    (print "Congrats")
+    (print {
+      result: "congrats",
+      asset: (contract-of asset),
+      amount: amount,
+      nft-id: id,
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim FT / Phase 2
@@ -368,7 +446,13 @@
     (try! (send-ft-to-winner asset amount tx-sender))
     (map-set tokens-phase-2 { id: id } { claim: false})
     (map-set awards { phase: u2, id: id } { type: "tokens" , claim: false })
-    (print "Congrats")
+    (print {
+      result: "congrats",
+      asset: (contract-of asset),
+      amount: amount,
+      nft-id: id,
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim FT / Phase 3
@@ -379,7 +463,13 @@
     (try! (send-ft-to-winner asset amount tx-sender))
     (map-set tokens-phase-3 { id: id } { claim: false})
     (map-set awards { phase: u3, id: id } { type: "tokens" , claim: false })
-    (print "Congrats")
+    (print {
+      result: "congrats",
+      asset: (contract-of asset),
+      amount: amount,
+      nft-id: id,
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Burn 5 NFTs / Phase 1
@@ -397,6 +487,15 @@
     (try! (contract-call? .skullcoin-competitive-g2-phase1 transfer id5 tx-sender BURN-WALLET))
     (try! (contract-call? .skullcoin-competitive-g2-phase2 mint tx-sender))
     (try! (contract-call? .skullcoin-competitive-g2-phase2 mint tx-sender))
+    (print {
+      result: "nfts successfully burned",
+      user: contract-caller,
+      nft-1: id1,
+      nft-2: id2,
+      nft-3: id3,
+      nft-4: id4,
+      nft-5: id5
+    })
   (ok true)))
 
 ;; Burn 5 NFTs / Phase 2
@@ -414,6 +513,15 @@
     (try! (contract-call? .skullcoin-competitive-g2-phase2 transfer id5 tx-sender BURN-WALLET))
     (try! (contract-call? .skullcoin-competitive-g2-phase3 mint tx-sender))
     (try! (contract-call? .skullcoin-competitive-g2-phase3 mint tx-sender))
+    (print {
+      result: "nfts successfully burned",
+      user: contract-caller,
+      nft-1: id1,
+      nft-2: id2,
+      nft-3: id3,
+      nft-4: id4,
+      nft-5: id5
+    })
   (ok true)))
 
 ;; Burn 5 NFTs / Phase 3
@@ -430,6 +538,15 @@
     (try! (contract-call? .skullcoin-competitive-g2-phase3 transfer id4 tx-sender BURN-WALLET))
     (try! (contract-call? .skullcoin-competitive-g2-phase3 transfer id5 tx-sender BURN-WALLET))
     (try! (contract-call? .skullcoin-competitive-g2-phase4 mint tx-sender))
+    (print {
+      result: "nfts successfully burned",
+      user: contract-caller,
+      nft-1: id1,
+      nft-2: id2,
+      nft-3: id3,
+      nft-4: id4,
+      nft-5: id5
+    })
   (ok true)))
 
 ;; Internal - Claim NFT
