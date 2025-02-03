@@ -22,7 +22,6 @@
 (define-constant ERR-METADATA-FROZEN (err u204))
 (define-constant ERR-MINT-ALREADY-SET (err u205))
 (define-constant ERR-LISTING (err u206))
-(define-constant ERR-MINT-LIMIT (err u207))
 
 ;; Variables
 (define-data-var last-id uint u0)
