@@ -1,15 +1,12 @@
 ;; Skullcoin | Competitive | Game #2 | v.1.0.1
 ;; skullco.in
 
-;; TODO
-;; 1. Random mint
-
 ;; Traits
-(use-trait ft-trait 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
+(use-trait ft-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait.sip-010-trait)
 
 ;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
-(define-constant BURN-WALLET 'SP5EDWN88FN8Q6A1MQ0N7SKKAG0VZ0ZQ9MFZ6RS8)
+(define-constant BURN-WALLET 'ST5EDWN88FN8Q6A1MQ0N7SKKAG0VZ0ZQ9MXZCEJK)
 (define-constant ERR-NOT-AUTHORIZED (err u100))
 (define-constant ERR-SALE-NOT-ACTIVE (err u101))
 (define-constant ERR-NOT-OWNER (err u102))

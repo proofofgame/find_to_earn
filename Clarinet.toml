@@ -6,13 +6,19 @@ telemetry = true
 cache_dir = '.\.cache'
 
 [[project.requirements]]
-contract_id = 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait'
+contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.commission-trait'
 
 [[project.requirements]]
-contract_id = 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait'
+contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait'
 
 [[project.requirements]]
-contract_id = 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard'
+contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.nft-trait'
+
+[[project.requirements]]
+contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin'
+
+[[project.requirements]]
+contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.testcoin'
 
 [contracts.skullcoin-competitive-g2-base]
 path = 'contracts/skullcoin-competitive-g2-base.clar'
@@ -36,6 +42,11 @@ epoch = 2.5
 
 [contracts.skullcoin-competitive-g2-phase4]
 path = 'contracts/skullcoin-competitive-g2-phase4.clar'
+clarity_version = 2
+epoch = 2.5
+
+[contracts.skullcoin-curiosity-shop-g2]
+path = 'contracts/skullcoin-curiosity-shop-g2.clar'
 clarity_version = 2
 epoch = 2.5
 

@@ -2,8 +2,8 @@
 ;; skullco.in
 
 ;; Traits
-(impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
-(use-trait commission-trait 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait.commission)
+(impl-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.nft-trait.nft-trait)
+(use-trait commission-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.commission-trait.commission)
 
 ;; Define NFT token
 (define-non-fungible-token skullcoin_competitive_g2_p1 uint)
@@ -117,7 +117,7 @@
         (let
         ((current-balance (get-balance new-owner)))
           (begin
-            (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-g2-base))
+            (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-g2-base))
             (var-set last-id next-id)
             (map-set token-count
               new-owner
