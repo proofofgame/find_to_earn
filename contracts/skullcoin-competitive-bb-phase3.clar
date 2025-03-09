@@ -1,4 +1,4 @@
-;; Skullcoin | Competitive | Game #2 | v.1.0.1
+;; Skullcoin | Competitive | Buidl Battle | v.1.0.1
 ;; skullco.in
 
 ;; Traits

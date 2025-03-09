@@ -15,38 +15,35 @@ contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait'
 contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.nft-trait'
 
 [[project.requirements]]
-contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin'
+contract_id = 'ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT.sbtc-token'
 
-[[project.requirements]]
-contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.testcoin'
-
-[contracts.skullcoin-competitive-g2-base]
-path = 'contracts/skullcoin-competitive-g2-base.clar'
+[contracts.skullcoin-competitive-bb-base]
+path = 'contracts/skullcoin-competitive-bb-base.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g2-phase1]
-path = 'contracts/skullcoin-competitive-g2-phase1.clar'
+[contracts.skullcoin-competitive-bb-phase1]
+path = 'contracts/skullcoin-competitive-bb-phase1.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g2-phase2]
-path = 'contracts/skullcoin-competitive-g2-phase2.clar'
+[contracts.skullcoin-competitive-bb-phase2]
+path = 'contracts/skullcoin-competitive-bb-phase2.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g2-phase3]
-path = 'contracts/skullcoin-competitive-g2-phase3.clar'
+[contracts.skullcoin-competitive-bb-phase3]
+path = 'contracts/skullcoin-competitive-bb-phase3.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g2-phase4]
-path = 'contracts/skullcoin-competitive-g2-phase4.clar'
+[contracts.skullcoin-competitive-bb-phase4]
+path = 'contracts/skullcoin-competitive-bb-phase4.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-curiosity-shop-g2]
-path = 'contracts/skullcoin-curiosity-shop-g2.clar'
+[contracts.skullcoin-competitive-bb-curiosity-shop]
+path = 'contracts/skullcoin-competitive-bb-curiosity-shop.clar'
 clarity_version = 2
 epoch = 2.5
 

@@ -1,4 +1,4 @@
-;; Skullcoin | Curiosity Shop | Game #2 | v.1.0.0
+;; Skullcoin | Curiosity Shop | Buidl Battle | v.1.0.0
 ;; skullco.in
 
 ;; Traits
@@ -78,17 +78,16 @@
     (ok true)))
 
 ;; Buy first clue
-;; SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity
 (define-public (buy-clue-1 (hunt uint))
     (let
         ((amount (get clue-1-price (unwrap-panic (map-get? clues-prices { hunt: hunt })))))
             (asserts! (var-get sale-for-clue-1-active) ERR-SALE-NOT-ACTIVE)
-            (try! (contract-call? 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin transfer amount tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-curiosity-shop-g2 none))
+            (try! (contract-call? 'ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT.sbtc-token transfer amount tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-curiosity-shop-g2 none))
             (map-set clues { wallet: tx-sender, hunt-id: hunt } { clue-1: true, clue-2: false, clue-3: false })
             (print {
                 result: "clue 1",
                 hunt: hunt,
-                asset: "skullcoin",
+                asset: "sBTC",
                 amount: amount,
                 user: contract-caller
             })
@@ -96,18 +95,17 @@
 )   
 
 ;; Buy second clue
-;; SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity
 (define-public (buy-clue-2 (hunt uint))
     (let
         ((amount (get clue-2-price (unwrap-panic (map-get? clues-prices { hunt: hunt })))))
             (asserts! (var-get sale-for-clue-2-3-active) ERR-SALE-NOT-ACTIVE)
             (asserts! (is-eq (get clue-2 (unwrap-panic (map-get? clues { wallet: tx-sender, hunt-id: hunt }))) false) ERR-ALREADY-PURCHASED)
-            (try! (contract-call? 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin transfer amount tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-curiosity-shop-g2 none))
+            (try! (contract-call? 'ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT.sbtc-token transfer amount tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-curiosity-shop-g2 none))
             (map-set clues { wallet: tx-sender, hunt-id: hunt } { clue-1: (get clue-1 (unwrap-panic (map-get? clues { wallet: tx-sender, hunt-id: hunt }))), clue-2: true, clue-3: false })
             (print {
                 result: "clue 2",
                 hunt: hunt,
-                asset: "skullcoin",
+                asset: "sBTC",
                 amount: amount,
                 user: contract-caller
             })
@@ -115,7 +113,6 @@
 )
 
 ;; Buy third clue
-;; SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token
 (define-public (buy-clue-3 (hunt uint))
     (let
         ((amount (get clue-3-price (unwrap-panic (map-get? clues-prices { hunt: hunt })))))
@@ -123,7 +120,7 @@
             (asserts! (is-eq (get clue-1 (unwrap-panic (map-get? clues { wallet: tx-sender, hunt-id: hunt }))) true) ERR-NOT-CLAIMED-EARLY-CLUES)
             (asserts! (is-eq (get clue-2 (unwrap-panic (map-get? clues { wallet: tx-sender, hunt-id: hunt }))) true) ERR-NOT-CLAIMED-EARLY-CLUES)
             (asserts! (is-eq (get clue-3 (unwrap-panic (map-get? clues { wallet: tx-sender, hunt-id: hunt }))) false) ERR-ALREADY-PURCHASED)
-            (try! (contract-call? 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.testcoin transfer amount tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-curiosity-shop-g2 none))
+            (try! (contract-call? 'ST1F7QA2MDF17S807EPA36TSS8AMEFY4KA9TVGWXT.sbtc-token transfer amount tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-curiosity-shop-g2 none))
             (map-set clues { wallet: tx-sender, hunt-id: hunt } { clue-1: (get clue-1 (unwrap-panic (map-get? clues { wallet: tx-sender, hunt-id: hunt }))), clue-2: (get clue-2 (unwrap-panic (map-get? clues { wallet: tx-sender, hunt-id: hunt }))), clue-3: true })
             (print {
                 result: "clue 3",

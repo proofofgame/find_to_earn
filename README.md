@@ -6,6 +6,10 @@ All operations performed by the user in the web interface (on the website) are e
 
 Contract Address: 
 
+### Curiosity Shop Contract
+
+Contract Address: 
+
 ### NFT Contracts
 
 Phase 1 Contract Address: 
@@ -16,7 +20,7 @@ Phase 3 Contract Address:
 
 Phase 4 Contract Address: 
 
-### Functions
+### Base Contract Functions
 
 **Public**
 
@@ -121,5 +125,11 @@ set-vrf: Setting a new VRF hash.
 **Internal Calls**
 
 as-contract: Registers the minting address for NFT contracts.
+
+### Curiosity Shop Contract Functions
+
+**Public**
+
+
 
 # Made with :heart:
