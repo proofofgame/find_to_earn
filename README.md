@@ -4,21 +4,21 @@
 
 All operations performed by the user in the web interface (on the website) are executed in this contract.
 
-Contract Address: 
+Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-bb-base?chain=testnet
 
 ### Curiosity Shop Contract
 
-Contract Address: 
+Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-bb-curiosity-shop?chain=testnet
 
 ### NFT Contracts
 
-Phase 1 Contract Address: 
+Phase 1 Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-bb-phase1?chain=testnet
 
-Phase 2 Contract Address: 
+Phase 2 Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-bb-phase2?chain=testnet
 
-Phase 3 Contract Address: 
+Phase 3 Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-bb-phase3?chain=testnet
 
-Phase 4 Contract Address: 
+Phase 4 Contract Address: https://explorer.hiro.so/txid/ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-bb-phase4?chain=testnet
 
 ### Base Contract Functions
 
