@@ -64,7 +64,7 @@
         (try! (as-contract (contract-call? asset transfer amount tx-sender CONTRACT-OWNER none)))
     (ok true)))
 
-;; Set price first clue (only contract owner)
+;; Set price for clues (only contract owner)
 (define-public (set-price-for-clues (hunt uint) (clue-1-price uint) (clue-2-price uint) (clue-3-price uint))
     (begin
         (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
