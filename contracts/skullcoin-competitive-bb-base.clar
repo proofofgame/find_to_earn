@@ -196,6 +196,10 @@
 (define-public (claim-one)
   (begin
     (try! (claim))
+    (print {
+      result: "successfully mint 1 NFT",
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim 5 NFT
@@ -206,6 +210,10 @@
     (try! (claim))
     (try! (claim))
     (try! (claim))
+    (print {
+      result: "successfully mint 5 NFT",
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim 10 NFT
@@ -221,6 +229,10 @@
     (try! (claim))
     (try! (claim))
     (try! (claim))
+    (print {
+      result: "successfully mint 10 NFT",
+      user: contract-caller
+    })
   (ok true)))
 
 ;; Claim treasure / Phase 1

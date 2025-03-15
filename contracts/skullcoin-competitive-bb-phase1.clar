@@ -117,7 +117,7 @@
         (let
         ((current-balance (get-balance new-owner)))
           (begin
-            (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-g2-base))
+            (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-bb-base))
             (var-set last-id next-id)
             (map-set token-count
               new-owner
