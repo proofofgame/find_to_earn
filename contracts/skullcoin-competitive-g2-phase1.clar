@@ -25,7 +25,7 @@
 
 ;; Variables
 (define-data-var last-id uint u0)
-(define-data-var mint-limit uint u5000)
+(define-data-var mint-limit uint u10000)
 (define-data-var mint-price-phase1 uint u2000000)
 (define-data-var wl-sale-active bool false)
 (define-data-var metadata-frozen bool false)

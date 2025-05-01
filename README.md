@@ -14,7 +14,9 @@ Phase 2 Contract Address:
 
 Phase 3 Contract Address: 
 
-Phase 4 Contract Address: 
+### Curiosity Shop Contract
+
+Contract Address:
 
 ### Functions
 
@@ -121,5 +123,35 @@ set-vrf: Setting a new VRF hash.
 **Internal Calls**
 
 as-contract: Registers the minting address for NFT contracts.
+
+### Curiosity Shop Contract Functions
+
+**Public**
+
+clue-1-sale-enabled: Check sales active.
+
+clue-2-3-sale-enabled: Check sales for clue 2 & 3 active.
+
+get-price-clue-1: Get first clue price.
+
+get-price-clue-2: Get second clue price.
+
+get-price-clue-3: Get third clue price.
+
+get-clues-status: Get clues status by principal and hunt.
+
+flip-clue-1-sale: Set sale flag for clue 1. Only callable by the contract owner.
+
+flip-clue-2-3-sale: Set sale flag for clue 2 & 3. Only callable by the contract owner.
+
+withdraw-ft: Withdrawal SIP-010 tokens from contract. Only callable by the contract owner.
+
+set-price-for-clues: Set price for clues. Only callable by the contract owner.
+
+buy-clue-1: Buy first clue.
+
+buy-clue-2: Buy second clue.
+
+buy-clue-3: Buy third clue.
 
 # Made with :heart:

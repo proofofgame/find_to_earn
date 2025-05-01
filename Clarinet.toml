@@ -14,6 +14,9 @@ contract_id = 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait'
 [[project.requirements]]
 contract_id = 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard'
 
+[[project.requirements]]
+contract_id = 'SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token'
+
 [contracts.skullcoin-competitive-g2-base]
 path = 'contracts/skullcoin-competitive-g2-base.clar'
 clarity_version = 2
@@ -34,8 +37,8 @@ path = 'contracts/skullcoin-competitive-g2-phase3.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g2-phase4]
-path = 'contracts/skullcoin-competitive-g2-phase4.clar'
+[contracts.skullcoin-competitive-g2-curiosity-shop]
+path = 'contracts/skullcoin-competitive-g2-curiosity-shop.clar'
 clarity_version = 2
 epoch = 2.5
 

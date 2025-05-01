@@ -512,7 +512,6 @@
     (try! (contract-call? .skullcoin-competitive-g2-phase2 transfer id4 tx-sender BURN-WALLET))
     (try! (contract-call? .skullcoin-competitive-g2-phase2 transfer id5 tx-sender BURN-WALLET))
     (try! (contract-call? .skullcoin-competitive-g2-phase3 mint tx-sender))
-    (try! (contract-call? .skullcoin-competitive-g2-phase3 mint tx-sender))
     (print {
       result: "nfts successfully burned",
       user: contract-caller,
@@ -537,7 +536,6 @@
     (try! (contract-call? .skullcoin-competitive-g2-phase3 transfer id3 tx-sender BURN-WALLET))
     (try! (contract-call? .skullcoin-competitive-g2-phase3 transfer id4 tx-sender BURN-WALLET))
     (try! (contract-call? .skullcoin-competitive-g2-phase3 transfer id5 tx-sender BURN-WALLET))
-    (try! (contract-call? .skullcoin-competitive-g2-phase4 mint tx-sender))
     (print {
       result: "nfts successfully burned",
       user: contract-caller,
@@ -607,4 +605,3 @@
 (as-contract (contract-call? .skullcoin-competitive-g2-phase1 set-mint-address))
 (as-contract (contract-call? .skullcoin-competitive-g2-phase2 set-mint-address))
 (as-contract (contract-call? .skullcoin-competitive-g2-phase3 set-mint-address))
-(as-contract (contract-call? .skullcoin-competitive-g2-phase4 set-mint-address))
