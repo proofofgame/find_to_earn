@@ -1,6 +1,9 @@
 ;; Skullcoin | Competitive | Game #2 | Curiosity Shop | v.1.0.0
 ;; skullco.in
 
+;; TODO
+;; 1. Add limits for clues amount by hunt
+
 ;; Traits
 (use-trait ft-trait 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
 
