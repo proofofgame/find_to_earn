@@ -42,6 +42,11 @@ path = 'contracts/skullcoin-competitive-g2-curiosity-shop.clar'
 clarity_version = 2
 epoch = 2.5
 
+[contracts.skullcoin-quests]
+path = 'contracts/skullcoin-quests.clar'
+clarity_version = 2
+epoch = 2.5
+
 [repl.analysis]
 passes = []
 
