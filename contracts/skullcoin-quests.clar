@@ -79,9 +79,9 @@
         (asserts! (var-get sale-active) ERR-SALE-NOT-ACTIVE)
         (asserts! (not (is-eq (var-get remaining-slots) u0)) ERR-OUT-OF-SLOTS)
         (asserts! (is-eq (unwrap-panic (get claim (map-get? data (tuple (quest-id (var-get current-quest)) (player tx-sender))))) true) ERR-ALREADY-IN-QUEST)
-        ;;(try! (contract-call? 'SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity transfer (var-get amount) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-quests none))
+        (try! (contract-call? 'SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity transfer (var-get amount) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-quests none))
         (var-set remaining-slots (- (var-get remaining-slots) u1))
-        (map-set players { quest-id: (var-get current-quest) } { players-list: (unwrap! (as-max-len? (concat (unwrap! (get players-list (map-get? players { quest-id: (var-get current-quest)}))) (concat memo ";")) u5000)) } )
+        (map-set players { quest-id: (var-get current-quest) } { players-list: (unwrap-panic (as-max-len? (concat (get players-list (unwrap-panic (map-get? players { quest-id: (var-get current-quest)}))) (concat memo ";")) u5000)) } )
         (map-set data { quest-id: (var-get current-quest), player: tx-sender } { claim: true } )
         (print {
             result: "participation successfully purchased",
