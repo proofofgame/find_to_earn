@@ -42,6 +42,13 @@
 (define-read-only (get-quest-players (quest uint))
     (unwrap-panic (get players-list (map-get? players { quest-id: quest}))))
 
+;; Set sale flag (only contract owner)
+(define-public (flip-sale)
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (var-set sale-active (not (var-get sale-active)))
+    (ok (var-get sale-active))))
+
 ;; Withdrawal SIP-010 tokens from contract (only contract owner)
 (define-public (withdraw-ft (asset <ft-trait>) (amount uint))
     (begin
