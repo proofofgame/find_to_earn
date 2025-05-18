@@ -51,8 +51,7 @@
 
 ;; Get award claim status
 (define-read-only (get-award-status (phase-id uint) (nft-id uint))
-    (ok (map-get? awards (tuple (phase phase-id) (id nft-id))))
-)
+    (ok (map-get? awards (tuple (phase phase-id) (id nft-id)))))
 
 ;; Check whitelist sales active
 (define-read-only (wl-enabled)
