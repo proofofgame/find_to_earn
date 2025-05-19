@@ -96,6 +96,6 @@
             asset: "skullcoin",
             price: (var-get price),
             memo: memo,
-            user: contract-caller
+            user: tx-sender
         })
     (ok true)))
