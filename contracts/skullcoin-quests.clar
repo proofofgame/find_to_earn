@@ -2,15 +2,16 @@
 ;; skullco.in
 
 ;; Traits
-(use-trait ft-trait 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
+;; (use-trait ft-trait 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
+(use-trait ft-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait.sip-010-trait)
 
 ;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
-(define-constant BURN-WALLET 'SP000000000000000000002Q6VF78)
+;; (define-constant BURN-WALLET 'SP000000000000000000002Q6VF78)
+(define-constant BURN-WALLET 'ST000000000000000000002AMW42H)
 (define-constant ERR-NOT-AUTHORIZED (err u100))
 (define-constant ERR-SALE-NOT-ACTIVE (err u101))
 (define-constant ERR-OUT-OF-SLOTS (err u102))
-(define-constant ERR-ALREADY-IN-QUEST (err u103))
 
 ;; Variables
 (define-data-var sale-active bool false)
@@ -85,8 +86,8 @@
     (begin
         (asserts! (var-get sale-active) ERR-SALE-NOT-ACTIVE)
         (asserts! (not (is-eq (var-get remaining-slots) u0)) ERR-OUT-OF-SLOTS)
-        (asserts! (is-eq (unwrap-panic (get claim (map-get? data (tuple (quest-id (var-get current-quest)) (player tx-sender))))) true) ERR-ALREADY-IN-QUEST)
-        (try! (contract-call? 'SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity transfer (var-get amount) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-quests none))
+        ;; (try! (contract-call? 'SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity transfer (var-get price) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-quests none))
+        (try! (contract-call? 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin transfer (var-get price) tx-sender .skullcoin-quests-test none))
         (var-set remaining-slots (- (var-get remaining-slots) u1))
         (map-set players { quest-id: (var-get current-quest) } { players-list: (unwrap-panic (as-max-len? (concat (get players-list (unwrap-panic (map-get? players { quest-id: (var-get current-quest)}))) (concat memo ";")) u5000)) } )
         (map-set data { quest-id: (var-get current-quest), player: tx-sender } { claim: true } )
