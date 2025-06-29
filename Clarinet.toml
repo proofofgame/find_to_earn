@@ -31,11 +31,6 @@ path = 'contracts/skullcoin-competitive-g2-base.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g2-curiosity-shop]
-path = 'contracts/skullcoin-competitive-g2-curiosity-shop.clar'
-clarity_version = 2
-epoch = 2.5
-
 [contracts.skullcoin-competitive-g2-phase1]
 path = 'contracts/skullcoin-competitive-g2-phase1.clar'
 clarity_version = 2
@@ -46,13 +41,6 @@ path = 'contracts/skullcoin-competitive-g2-phase2.clar'
 clarity_version = 2
 epoch = 2.5
 
-[contracts.skullcoin-competitive-g2-phase3]
-path = 'contracts/skullcoin-competitive-g2-phase3.clar'
-clarity_version = 2
-epoch = 2.5
-
-[contracts.skullcoin-quests]
-path = 'contracts/skullcoin-quests.clar'
 clarity_version = 2
 epoch = 2.5
 [repl.analysis]

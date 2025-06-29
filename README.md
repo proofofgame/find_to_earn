@@ -1,4 +1,4 @@
-# Skullcoin Competitive
+# Skullcoin Competitive Seed Phrase Find
 
 ### Base Contract
 
@@ -12,61 +12,13 @@ Phase 1 Contract Address:
 
 Phase 2 Contract Address: 
 
-Phase 3 Contract Address: 
-
-### Curiosity Shop Contract
-
-Contract Address:
-
 ### Functions
 
 **Public**
 
-get-wl-balance: Get whitelist balance by address.
-
-get-award-status: Get award claim status by phase and NFT id.
-
-wl-enabled: Check whitelist sales active.
-
-public-enabled: Check public sales active.
-
-flip-wl-sale: Toggles the whitelist sale state. Only callable by the contract owner.
+sale-enabled: Check sales active or not.
 
 flip-sale: Toggles the public sale state. Only callable by the contract owner.
-
-deposit-ft: Deposit SIP-010 tokens in contract. Only callable by the contract owner.
-
-withdraw-ft: Withdrawal SIP-010 tokens from contract. Only callable by the contract owner.
-
-deposit-stx: Deposit STX in contract. Only callable by the contract owner.
-
-withdraw-stx: Withdrawal STX from contract. Only callable by the contract owner.
-
-set-wl-wallets: Set whitelist wallets. Only callable by the contract owner.
-
-set-treasure-phase-1: Setting NFT ids that gives a treasure reward at the first rarity level. Only callable by the contract owner.
-
-set-treasure-phase-2: Setting NFT ids that gives a treasure reward at the second rarity level. Only callable by the contract owner.
-
-set-treasure-phase-3: Setting NFT ids that gives a treasure reward at the third rarity level. Only callable by the contract owner.
-
-set-chest-phase-1: Setting NFT ids that gives a chest reward at the first rarity level. Only callable by the contract owner.
-
-set-chest-phase-2: Setting NFT ids that gives a chest reward at the second rarity level. Only callable by the contract owner.
-
-set-chest-phase-3: Setting NFT ids that gives a chest reward at the third rarity level. Only callable by the contract owner.
-
-set-tokens-phase-1: Setting NFT ids that gives a ft reward at the first rarity level. Only callable by the contract owner.
-
-set-tokens-phase-2: Setting NFT ids that gives a ft reward at the second rarity level. Only callable by the contract owner.
-
-set-tokens-phase-3: Setting NFT ids that gives a ft reward at the third rarity level. Only callable by the contract owner.
-
-set-stx-phase-1: Setting NFT ids that gives a stx reward at the first rarity level. Only callable by the contract owner.
-
-set-stx-phase-2: Setting NFT ids that gives a stx reward at the second rarity level. Only callable by the contract owner.
-
-set-stx-phase-3: Setting NFT ids that gives a stx reward at the third rarity level. Only callable by the contract owner.
 
 claim-one: Mints 1 NFT.
 
@@ -74,84 +26,18 @@ claim-five: Mints 5 NFTs.
 
 claim-ten: Mints 10 NFTs.
 
-claim-treasure-phase-1: Checks the treasure at the first rarity level.
-
-claim-treasure-phase-2: Checks the treasure at the second rarity level.
-
-claim-treasure-phase-3: Checks the treasure at the third rarity level.
-
-claim-chest-phase-1: Checks the chest at the first rarity level.
-
-claim-chest-phase-2: Checks the chest at the second rarity level.
-
-claim-chest-phase-3: Checks the chest at the third rarity level.
-
-claim-stx-phase-1: Checks the stx reward at the first rarity level.
-
-claim-stx-phase-2: Checks the stx reward at the second rarity level.
-
-claim-stx-phase-3: Checks the stx reward at the third rarity level.
-
-claim-tokens-phase-1: Checks the ft reward at the first rarity level.
-
-claim-tokens-phase-2: Checks the ft reward at the second rarity level.
-
-claim-tokens-phase-3: Checks the ft reward at the third rarity level.
-
 burn-phase-1: Burns 5 NFTs of the first level.
 
 burn-phase-2: Burns 5 NFTs of the second level.
-
-burn-phase-3: Burns 5 NFTs of the third level.
 
 **Private**
 
 claim: Mints 1 NFT. Used internally in claim-five.
 
-wl-mint: Called within claim during active whitelist sales.
-
 mint: Called within claim during active public sales.
-
-send-stx-to-winner: Send STX to winner player in claim function for treasure/chest/stx NFTs.
-
-send-ft-to-winner: Send SIP-010 tokens to winner player in claim function for tokens NFTs.
-
-pick-id: Single number peak from VRF.
-
-set-vrf: Setting a new VRF hash.
 
 **Internal Calls**
 
 as-contract: Registers the minting address for NFT contracts.
-
-### Curiosity Shop Contract Functions
-
-**Public**
-
-clue-1-sale-enabled: Check sales active.
-
-clue-2-3-sale-enabled: Check sales for clue 2 & 3 active.
-
-get-price-clue-1: Get first clue price.
-
-get-price-clue-2: Get second clue price.
-
-get-price-clue-3: Get third clue price.
-
-get-clues-status: Get clues status by principal and hunt.
-
-flip-clue-1-sale: Set sale flag for clue 1. Only callable by the contract owner.
-
-flip-clue-2-3-sale: Set sale flag for clue 2 & 3. Only callable by the contract owner.
-
-withdraw-ft: Withdrawal SIP-010 tokens from contract. Only callable by the contract owner.
-
-set-price-for-clues: Set price for clues. Only callable by the contract owner.
-
-buy-clue-1: Buy first clue.
-
-buy-clue-2: Buy second clue.
-
-buy-clue-3: Buy third clue.
 
 # Made with :heart:

@@ -1,4 +1,4 @@
-;; Skullcoin | Competitive | Game #2 | v.1.0.1
+;; Skullcoin | Competitive | Seed Phrase | v.1.0.0
 ;; skullco.in
 
 ;; Traits
@@ -25,9 +25,8 @@
 
 ;; Variables
 (define-data-var last-id uint u0)
-(define-data-var mint-limit uint u10000)
-(define-data-var mint-price-phase1 uint u2000000)
-(define-data-var wl-sale-active bool false)
+(define-data-var mint-limit uint u2400)
+(define-data-var mint-price-phase1 uint u1000000)
 (define-data-var metadata-frozen bool false)
 (define-data-var base-uri (string-ascii 80) "ipfs://CID1/")
 
