@@ -9,6 +9,7 @@
 **/commission-trait
 **/node_modules
 .cache/**
+.vscode/**
 history.txt
 package-lock.json
 package.json
