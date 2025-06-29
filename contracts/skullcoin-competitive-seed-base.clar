@@ -10,15 +10,14 @@
 (define-constant ERR-NOT-AUTHORIZED (err u100))
 (define-constant ERR-SALE-NOT-ACTIVE (err u101))
 (define-constant ERR-NOT-OWNER (err u102))
+(define-constant ERR-LIMIT (err u103))
 
 ;; Variables
 (define-data-var sale-active bool false)
-(define-data-var last-block uint u0)
-(define-data-var byte-id uint u0)
-(define-data-var picked-id uint u0)
-(define-data-var last-vrf (buff 64) 0x00)
+(define-data-var token-amount uint u100000000000)
 
 ;; Maps
+;;(define-map limits principal uint)
 
 ;; Check public sales active
 (define-read-only (sale-enabled)
@@ -101,6 +100,7 @@
     (try! (contract-call? .skullcoin-competitive-seed-phase2 transfer id3 tx-sender BURN-WALLET))
     (try! (contract-call? .skullcoin-competitive-seed-phase2 transfer id4 tx-sender BURN-WALLET))
     (try! (contract-call? .skullcoin-competitive-seed-phase2 transfer id5 tx-sender BURN-WALLET))
+    (try! (send-ft-to-winner tx-sender))
     (print {
       result: "nfts successfully burned",
       user: contract-caller,
@@ -114,15 +114,21 @@
 
 ;; Internal - Claim NFT
 (define-private (claim)
-  (if (var-get wl-sale-active)
-    (wl-mint tx-sender)
-    (mint tx-sender)))
+    (mint tx-sender))
 
 ;; Internal - Mint NFT via public
 (define-private (mint (new-owner principal))
   (begin
     (asserts! (var-get sale-active) ERR-SALE-NOT-ACTIVE)
+    ;;(asserts! (<= (map-get? limits new-owner) u50) ERR-LIMIT)
     (try! (contract-call? .skullcoin-competitive-seed-phase1 mint new-owner))
+    ;;(map-set limits new-owner u1)
+  (ok true)))
+
+;; Internal - Send SIP-010 tokens to winner player in claim function for tokens NFTs
+(define-private (send-ft-to-winner (player principal))
+  (begin
+    (try! (as-contract (contract-call? 'SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity transfer (var-get token-amount) tx-sender player none)))
   (ok true)))
 
 ;; Register this contract as allowed to mint
