@@ -20,6 +20,12 @@ sale-enabled: Check sales active or not.
 
 flip-sale: Toggles the public sale state. Only callable by the contract owner.
 
+deposit-ft: Deposit SIP-010 tokens in contract. Only callable by the contract owner.
+
+withdraw-ft: Withdrawal SIP-010 tokens from contract. Only callable by the contract owner.
+
+withdraw-stx: Withdrawal STX from contract. Only callable by the contract owner.
+
 claim-one: Mints 1 NFT.
 
 claim-five: Mints 5 NFTs.
@@ -32,9 +38,9 @@ burn-phase-2: Burns 5 NFTs of the second level.
 
 **Private**
 
-claim: Mints 1 NFT. Used internally in claim-five.
+claim: Mints 1 NFT. Used internally in claim-five, etc.
 
-mint: Called within claim during active public sales.
+send-ft-to-winner: Send SIP-010 tokens to winner player in claim function for tokens NFTs.
 
 **Internal Calls**
 
