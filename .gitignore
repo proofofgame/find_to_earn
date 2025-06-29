@@ -1,10 +1,15 @@
 
 **/settings/Mainnet.toml
 **/settings/Testnet.toml
-**/temp
+**/deployments/default.testnet-plan.yaml
+**/deployments/default.mainnet-plan.yaml
 **/tests
 **/sip009-nft
 **/coverage
 **/commission-trait
+**/node_modules
 .cache/**
+.vscode/**
 history.txt
+package-lock.json
+package.json
