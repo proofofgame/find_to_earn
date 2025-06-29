@@ -6,7 +6,7 @@
 (use-trait commission-trait 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait.commission)
 
 ;; Define NFT token
-(define-non-fungible-token skullcoin_competitive_g2_p1 uint)
+(define-non-fungible-token skullcoin_competitive_seed_p1 uint)
 
 ;; Storage
 (define-map token-count principal uint)
@@ -44,7 +44,7 @@
 
 ;; Get the owner of the specified token ID
 (define-read-only (get-owner (id uint))
-  (ok (nft-get-owner? skullcoin_competitive_g2_p1 id)))
+  (ok (nft-get-owner? skullcoin_competitive_seed_p1 id)))
 
 ;; Get the last token ID
 (define-read-only (get-last-token-id)
@@ -111,12 +111,12 @@
     (let ((next-id (+ u1 (var-get last-id))))
       (asserts! (called-from-mint) ERR-NOT-AUTHORIZED)
       (asserts! (< (var-get last-id) (var-get mint-limit)) ERR-SOLD-OUT)
-      (match (nft-mint? skullcoin_competitive_g2_p1 next-id new-owner)
+      (match (nft-mint? skullcoin_competitive_seed_p1 next-id new-owner)
         success
         (let
         ((current-balance (get-balance new-owner)))
           (begin
-            (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-g2-base))
+            (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-seed-base))
             (var-set last-id next-id)
             (map-set token-count
               new-owner
@@ -127,7 +127,7 @@
 
 ;; Non-custodial marketplace
 (define-private (trnsfr (id uint) (sender principal) (recipient principal))
-  (match (nft-transfer? skullcoin_competitive_g2_p1 id sender recipient)
+  (match (nft-transfer? skullcoin_competitive_seed_p1 id sender recipient)
         success
           (let
             ((sender-balance (get-balance sender))
@@ -142,7 +142,7 @@
         error (err error)))
 
 (define-private (is-sender-owner (id uint))
-  (let ((owner (unwrap! (nft-get-owner? skullcoin_competitive_g2_p1 id) false)))
+  (let ((owner (unwrap! (nft-get-owner? skullcoin_competitive_seed_p1 id) false)))
     (or (is-eq tx-sender owner) (is-eq contract-caller owner))))
 
 (define-read-only (get-listing-in-ustx (id uint))
@@ -163,7 +163,7 @@
     (ok true)))
 	
 (define-public (buy-in-ustx (id uint) (comm <commission-trait>))
-  (let ((owner (unwrap! (nft-get-owner? skullcoin_competitive_g2_p1 id) ERR-NOT-FOUND))
+  (let ((owner (unwrap! (nft-get-owner? skullcoin_competitive_seed_p1 id) ERR-NOT-FOUND))
       (listing (unwrap! (map-get? market id) ERR-LISTING))
       (price (get price listing)))
     (asserts! (is-eq (contract-of comm) (get commission listing)) ERR-WRONG-COMMISSION)
