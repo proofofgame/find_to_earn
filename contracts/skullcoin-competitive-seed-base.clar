@@ -10,14 +10,10 @@
 (define-constant ERR-NOT-AUTHORIZED (err u100))
 (define-constant ERR-SALE-NOT-ACTIVE (err u101))
 (define-constant ERR-NOT-OWNER (err u102))
-(define-constant ERR-LIMIT (err u103))
 
 ;; Variables
 (define-data-var sale-active bool false)
 (define-data-var token-amount uint u100000000000)
-
-;; Maps
-;;(define-map limits principal uint)
 
 ;; Check public sales active
 (define-read-only (sale-enabled)
@@ -29,6 +25,27 @@
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (var-set sale-active (not (var-get sale-active)))
     (ok (var-get sale-active))))
+
+;; Deposit SIP-010 tokens in contract (only contract owner)
+(define-public (deposit-ft (asset <ft-trait>) (amount uint))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (try! (contract-call? asset transfer amount tx-sender (as-contract tx-sender) none))
+  (ok true)))
+
+;; Withdrawal SIP-010 tokens from contract (only contract owner)
+(define-public (withdraw-ft (asset <ft-trait>) (amount uint))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (try! (as-contract (contract-call? asset transfer amount tx-sender CONTRACT-OWNER none)))
+  (ok true)))
+
+;; Withdrawal STX from contract (only contract owner)
+(define-public (withdraw-stx (amount uint))
+  (begin
+    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
+    (try! (as-contract (stx-transfer? amount tx-sender CONTRACT-OWNER)))
+  (ok true)))
 
 ;; Claim 1 NFT
 (define-public (claim-one)
@@ -112,17 +129,11 @@
     })
   (ok true)))
 
-;; Internal - Claim NFT
-(define-private (claim)
-    (mint tx-sender))
-
 ;; Internal - Mint NFT via public
-(define-private (mint (new-owner principal))
+(define-private (claim)
   (begin
     (asserts! (var-get sale-active) ERR-SALE-NOT-ACTIVE)
-    ;;(asserts! (<= (map-get? limits new-owner) u50) ERR-LIMIT)
-    (try! (contract-call? .skullcoin-competitive-seed-phase1 mint new-owner))
-    ;;(map-set limits new-owner u1)
+    (try! (contract-call? .skullcoin-competitive-seed-phase1 mint tx-sender))
   (ok true)))
 
 ;; Internal - Send SIP-010 tokens to winner player in claim function for tokens NFTs

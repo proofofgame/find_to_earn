@@ -22,6 +22,7 @@
 (define-constant ERR-METADATA-FROZEN (err u204))
 (define-constant ERR-MINT-ALREADY-SET (err u205))
 (define-constant ERR-LISTING (err u206))
+(define-constant ERR-LIMIT (err u207))
 
 ;; Variables
 (define-data-var last-id uint u0)
@@ -116,6 +117,7 @@
         (let
         ((current-balance (get-balance new-owner)))
           (begin
+            (asserts! (>= current-balance u50) ERR-LIMIT)
             (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-seed-base))
             (var-set last-id next-id)
             (map-set token-count
