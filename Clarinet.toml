@@ -23,6 +23,12 @@ contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait'
 [[project.requirements]]
 contract_id = 'SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity'
 
+[[project.requirements]]
+contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.nft-trait'
+
+[[project.requirements]]
+contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.commission-trait'
+
 [contracts.skullcoin-competitive-seed-base]
 path = 'contracts/skullcoin-competitive-seed-base.clar'
 clarity_version = 2

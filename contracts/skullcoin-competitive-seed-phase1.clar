@@ -2,8 +2,10 @@
 ;; skullco.in
 
 ;; Traits
-(impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
-(use-trait commission-trait 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait.commission)
+;; (impl-trait 'SP2PABAF9FTAJYNFZH93XENAJ8FVY99RRM50D2JG9.nft-trait.nft-trait)
+;; (use-trait commission-trait 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait.commission)
+(impl-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.nft-trait.nft-trait)
+(use-trait commission-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.commission-trait.commission)
 
 ;; Define NFT token
 (define-non-fungible-token skullcoin_competitive_seed_p1 uint)
@@ -22,12 +24,13 @@
 (define-constant ERR-METADATA-FROZEN (err u204))
 (define-constant ERR-MINT-ALREADY-SET (err u205))
 (define-constant ERR-LISTING (err u206))
-(define-constant ERR-LIMIT (err u207))
+(define-constant ERR-LIMIT-FOR-WALLET (err u207))
 
 ;; Variables
 (define-data-var last-id uint u0)
 (define-data-var mint-limit uint u2400)
 (define-data-var mint-price-phase1 uint u1000000)
+(define-data-var mint-limit-for-wallet uint u50)
 (define-data-var metadata-frozen bool false)
 (define-data-var base-uri (string-ascii 80) "ipfs://CID1/")
 
@@ -117,8 +120,9 @@
         (let
         ((current-balance (get-balance new-owner)))
           (begin
-            (asserts! (>= current-balance u50) ERR-LIMIT)
-            (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-seed-base))
+            (asserts! (>= current-balance (var-get mint-limit-for-wallet)) ERR-LIMIT-FOR-WALLET)
+            ;; (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-seed-base))
+            (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-seed-base))
             (var-set last-id next-id)
             (map-set token-count
               new-owner
