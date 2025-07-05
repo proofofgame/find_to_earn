@@ -15,13 +15,13 @@ contract_id = 'SP2ESPYE74G94D2HD9X470426W1R6C2P22B4Z1Q5.commission-trait'
 contract_id = 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard'
 
 [[project.requirements]]
-contract_id = 'SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity'
-
-[[project.requirements]]
 contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin'
 
 [[project.requirements]]
 contract_id = 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait'
+
+[[project.requirements]]
+contract_id = 'SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity'
 
 [contracts.skullcoin-competitive-seed-base]
 path = 'contracts/skullcoin-competitive-seed-base.clar'
@@ -38,8 +38,6 @@ path = 'contracts/skullcoin-competitive-seed-phase2.clar'
 clarity_version = 2
 epoch = 2.5
 
-clarity_version = 2
-epoch = 2.5
 [repl.analysis]
 passes = []
 
@@ -48,3 +46,7 @@ strict = false
 trusted_sender = false
 trusted_caller = false
 callee_filter = false
+
+[repl.remote_data]
+enabled = false
+api_url = 'https://api.hiro.so'
