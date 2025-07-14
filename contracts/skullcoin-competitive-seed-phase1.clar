@@ -120,7 +120,7 @@
         (let
         ((current-balance (get-balance new-owner)))
           (begin
-            (asserts! (>= current-balance (var-get mint-limit-for-wallet)) ERR-LIMIT-FOR-WALLET)
+            (asserts! (<= current-balance (var-get mint-limit-for-wallet)) ERR-LIMIT-FOR-WALLET)
             ;; (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-seed-base))
             (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin-competitive-seed-base))
             (var-set last-id next-id)
