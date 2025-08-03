@@ -9,21 +9,15 @@
 (define-constant BURN-WALLET 'SP5EDWN88FN8Q6A1MQ0N7SKKAG0VZ0ZQ9MFZ6RS8)
 (define-constant ERR-NOT-AUTHORIZED (err u100))
 (define-constant ERR-SALE-NOT-ACTIVE (err u101))
-(define-constant ERR-BURN-NOT-ACTIVE (err u102))
-(define-constant ERR-NOT-OWNER (err u103))
+(define-constant ERR-NOT-OWNER (err u102))
 
 ;; Variables
 (define-data-var sale-active bool false)
-(define-data-var burn-active bool false)
 (define-data-var token-amount uint u100000000000)
 
 ;; Check public sales active
 (define-read-only (sale-enabled)
   (ok (var-get sale-active)))
-
-;; Check burn active
-(define-read-only (burn-enabled)
-  (ok (var-get burn-active)))
 
 ;; Set public sale flag (only contract owner)
 (define-public (flip-sale)
@@ -31,13 +25,6 @@
     (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
     (var-set sale-active (not (var-get sale-active)))
     (ok (var-get sale-active))))
-
-;; Set burn flag (only contract owner)
-(define-public (flip-burn)
-  (begin
-    (asserts! (is-eq tx-sender CONTRACT-OWNER) ERR-NOT-AUTHORIZED)
-    (var-set burn-active (not (var-get burn-active)))
-    (ok (var-get burn-active))))
 
 ;; Deposit SIP-010 tokens in contract (only contract owner)
 (define-public (deposit-ft (asset <ft-trait>) (amount uint))
@@ -91,40 +78,9 @@
     (try! (claim))
   (ok true)))
 
-;; Claim 25FT
-(define-public (claim-twenty-five)
-  (begin
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-    (try! (claim))
-  (ok true)))
-
 ;; Burn 5 NFTs / Phase 1
 (define-public (burn-phase-1 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
   (begin
-    (asserts! (var-get burn-active) ERR-BURN-NOT-ACTIVE)
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-seed-phase1 get-owner id1) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-seed-phase1 get-owner id2) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-seed-phase1 get-owner id3) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
@@ -151,7 +107,6 @@
 ;; Burn 5 NFTs / Phase 2
 (define-public (burn-phase-2 (id1 uint) (id2 uint) (id3 uint) (id4 uint) (id5 uint))
   (begin
-    (asserts! (var-get burn-active) ERR-BURN-NOT-ACTIVE)
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-seed-phase2 get-owner id1) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-seed-phase2 get-owner id2) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)
     (asserts! (is-eq (unwrap! (unwrap! (contract-call? .skullcoin-competitive-seed-phase2 get-owner id3) ERR-NOT-OWNER) ERR-NOT-OWNER) tx-sender) ERR-NOT-OWNER)

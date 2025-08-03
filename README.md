@@ -18,11 +18,7 @@ Phase 2 Contract Address:
 
 sale-enabled: Check sales active or not.
 
-burn-enabled: Check burn active or not.
-
 flip-sale: Toggles the public sale state. Only callable by the contract owner.
-
-flip-burn: Toggles the burn state. Only callable by the contract owner.
 
 deposit-ft: Deposit SIP-010 tokens in contract. Only callable by the contract owner.
 
@@ -35,8 +31,6 @@ claim-one: Mints 1 NFT.
 claim-five: Mints 5 NFTs.
 
 claim-ten: Mints 10 NFTs.
-
-claim-twenty-five: Mints 25 NFTs.
 
 burn-phase-1: Burns 5 NFTs of the first level.
 
