@@ -31,7 +31,6 @@ epoch = 2.5
 path = 'contracts/skullcoin-competitive-seed-phase2.clar'
 clarity_version = 2
 epoch = 2.5
-
 [repl.analysis]
 passes = []
 
