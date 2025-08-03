@@ -38,6 +38,11 @@
   (default-to u0
     (map-get? token-count account)))
 
+;; Get wallet limit
+(define-read-only (get-wallet-limit (account principal))
+  (default-to u0
+    (map-get? wallet-limit account)))
+
 ;; Transfer token to a specified principal
 (define-public (transfer (id uint) (sender principal) (recipient principal))
   (begin
