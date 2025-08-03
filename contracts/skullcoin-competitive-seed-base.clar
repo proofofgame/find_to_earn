@@ -2,13 +2,11 @@
 ;; skullco.in
 
 ;; Traits
-;; (use-trait ft-trait 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
-(use-trait ft-trait 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.sip-010-trait.sip-010-trait)
+(use-trait ft-trait 'SP3FBR2AGK5H9QBDH3EEN6DF8EK8JY7RX8QJ5SVTE.sip-010-trait-ft-standard.sip-010-trait)
 
 ;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
-;; (define-constant BURN-WALLET 'SP5EDWN88FN8Q6A1MQ0N7SKKAG0VZ0ZQ9MFZ6RS8)
-(define-constant BURN-WALLET 'ST5EDWN88FN8Q6A1MQ0N7SKKAG0VZ0ZQ9MXZCEJK)
+(define-constant BURN-WALLET 'SP5EDWN88FN8Q6A1MQ0N7SKKAG0VZ0ZQ9MFZ6RS8)
 (define-constant ERR-NOT-AUTHORIZED (err u100))
 (define-constant ERR-SALE-NOT-ACTIVE (err u101))
 (define-constant ERR-BURN-NOT-ACTIVE (err u102))
@@ -186,8 +184,7 @@
 ;; Internal - Send SIP-010 tokens to winner player in claim function for tokens NFTs
 (define-private (send-ft-to-winner (player principal))
   (begin
-    ;; (try! (as-contract (contract-call? 'SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity transfer (var-get token-amount) tx-sender player none)))
-    (try! (as-contract (contract-call? 'ST3T54N6G4HN7GPBCYMSDKP4W00C45X19GNH7C0T6.skullcoin transfer (var-get token-amount) tx-sender player none)))
+    (try! (as-contract (contract-call? 'SP3BRXZ9Y7P5YP28PSR8YJT39RT51ZZBSECTCADGR.skullcoin-stxcity transfer (var-get token-amount) tx-sender player none)))
   (ok true)))
 
 ;; Register this contract as allowed to mint
