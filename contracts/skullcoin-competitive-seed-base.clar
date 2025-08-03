@@ -91,7 +91,7 @@
     (try! (claim))
   (ok true)))
 
-;; Claim 25FT
+;; Claim 25 NFT
 (define-public (claim-twenty-five)
   (begin
     (try! (claim))
