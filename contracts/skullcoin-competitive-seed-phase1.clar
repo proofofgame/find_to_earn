@@ -12,6 +12,7 @@
 (define-map token-count principal uint)
 (define-map market uint {price: uint, commission: principal})
 (define-map mint-address bool principal)
+(define-map wallet-limit principal uint)
 
 ;; Constants and Errors
 (define-constant CONTRACT-OWNER tx-sender)
@@ -22,12 +23,13 @@
 (define-constant ERR-METADATA-FROZEN (err u204))
 (define-constant ERR-MINT-ALREADY-SET (err u205))
 (define-constant ERR-LISTING (err u206))
-(define-constant ERR-LIMIT (err u207))
+(define-constant ERR-LIMIT-FOR-WALLET (err u207))
 
 ;; Variables
 (define-data-var last-id uint u0)
 (define-data-var mint-limit uint u2400)
 (define-data-var mint-price-phase1 uint u1000000)
+(define-data-var mint-limit-for-wallet uint u50)
 (define-data-var metadata-frozen bool false)
 (define-data-var base-uri (string-ascii 80) "ipfs://CID1/")
 
@@ -115,11 +117,13 @@
       (match (nft-mint? skullcoin_competitive_seed_p1 next-id new-owner)
         success
         (let
-        ((current-balance (get-balance new-owner)))
+        ((current-balance (get-balance new-owner))
+         (wallet-balance (default-to u0 (map-get? wallet-limit new-owner))))
           (begin
-            (asserts! (>= current-balance u50) ERR-LIMIT)
+            (asserts! (<= wallet-balance (var-get mint-limit-for-wallet)) ERR-LIMIT-FOR-WALLET)
             (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-seed-base))
             (var-set last-id next-id)
+            (map-set wallet-limit new-owner (+ (default-to u0 (map-get? wallet-limit new-owner)) u1))
             (map-set token-count
               new-owner
               (+ current-balance u1)
