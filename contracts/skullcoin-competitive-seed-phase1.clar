@@ -125,7 +125,7 @@
         ((current-balance (get-balance new-owner))
          (wallet-balance (default-to u0 (map-get? wallet-limit new-owner))))
           (begin
-            (asserts! (<= wallet-balance (var-get mint-limit-for-wallet)) ERR-LIMIT-FOR-WALLET)
+            (asserts! (< wallet-balance (var-get mint-limit-for-wallet)) ERR-LIMIT-FOR-WALLET)
             (try! (stx-transfer? (var-get mint-price-phase1) tx-sender 'SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-seed-base))
             (var-set last-id next-id)
             (map-set wallet-limit new-owner (+ (default-to u0 (map-get? wallet-limit new-owner)) u1))

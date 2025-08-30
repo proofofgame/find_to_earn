@@ -4,13 +4,13 @@
 
 All operations performed by the user in the web interface (on the website) are executed in this contract.
 
-Contract Address: 
+Contract Address: https://explorer.hiro.so/txid/SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-seed-base?chain=mainnet
 
 ### NFT Contracts
 
-Phase 1 Contract Address: 
+Phase 1 Contract Address: https://explorer.hiro.so/txid/SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-seed-phase1?chain=mainnet
 
-Phase 2 Contract Address: 
+Phase 2 Contract Address: https://explorer.hiro.so/txid/SP3T54N6G4HN7GPBCYMSDKP4W00C45X19GQ4VT13Y.skullcoin-competitive-seed-phase1?chain=mainnet
 
 ### Functions
 
